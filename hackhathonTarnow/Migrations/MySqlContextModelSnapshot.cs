@@ -50,58 +50,22 @@ namespace hackhathonTarnow.Migrations
 
                     b.Property<string>("CardId");
 
-                    b.Property<DateTime>("CreatedDate");
-
                     b.Property<string>("Email");
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("PESEL");
+
                     b.Property<string>("Password");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("Role");
 
                     b.Property<string>("Surname");
 
-                    b.Property<DateTime?>("UpdatedDate");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("hackhathonTarnow.Models.Vehicle", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CarPlate");
-
-                    b.Property<Guid?>("ParkingId");
-
-                    b.Property<Guid?>("UserId");
-
-                    b.Property<string>("VehicleType");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParkingId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Vehicles");
-                });
-
-            modelBuilder.Entity("hackhathonTarnow.Models.Vehicle", b =>
-                {
-                    b.HasOne("hackhathonTarnow.Models.Parking", "Parking")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("ParkingId");
-
-                    b.HasOne("hackhathonTarnow.Models.User", "User")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
