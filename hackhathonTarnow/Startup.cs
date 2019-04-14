@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using hackhathonTarnow.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace hackhathonTarnow
@@ -41,7 +44,20 @@ namespace hackhathonTarnow
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("CorsPolicy"));
             });
-
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                        .AddJwtBearer(options =>
+                        {
+                            options.TokenValidationParameters = new TokenValidationParameters
+                            {
+                                ValidateIssuer = false,
+                                ValidateAudience = false,
+                                ValidateLifetime = true,
+                                ValidateIssuerSigningKey = false,
+                                ValidIssuer = "localhost:4200",
+                                ValidAudience = "localhost:4200",
+                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))
+                            };
+                        });
             services.AddDbContextPool<MySqlContext>(options => options.UseMySql("Server=127.0.0.1;Port=3306;Database=kudowa;User=root;Password=zaq1@WSX;", mysqlOptions =>
             {
                 mysqlOptions.ServerVersion(new Version(10, 1, 32), ServerType.MySql); // replace with your Server Version and Type
