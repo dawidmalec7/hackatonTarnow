@@ -6,4 +6,13 @@
   .form-field{
     width: 100%;
   }
+  .mat-card-title{
+    padding-bottom:15px;
+  }
 }
+
+@media (max-width: 767.98px) {
+  .image-wrapper{
+    height: 300px;
+  }
+} 
