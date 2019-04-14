@@ -1,15 +1,28 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Witamy w parkIN</mat-card-title>
-    <mat-card-subtitle>Jedynej w Tarnowie aplikacji parkingowej</mat-card-subtitle>
-  </mat-card-header>
+<mat-card class="bg-image" style="background: url('../assets/tarnow1.jpg');">
   <mat-card-content>
-    <p>
-      lorem ipsum dolor sit amet.
-    </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 bg-white">
+          <div class="left-side-wrapper">
+            <form class="login-form">
+              <mat-card-title>Witamy w parkIN</mat-card-title>
+              <mat-card-subtitle>Jedynej w Tarnowie aplikacji parkingowej</mat-card-subtitle>
+              <mat-form-field class="form-field full-width">
+                <input matInput placeholder="Email">
+              </mat-form-field><br>
+              <mat-form-field class="form-field full-width">
+                <input matInput placeholder="Password" type="password" >
+              </mat-form-field>
+            </form>
+            <mat-card-actions>
+              <a mat-raised-button routerLink="" color="accent">Zaloguj</a>
+              <button mat-button color="accent">Informacje</button>
+            </mat-card-actions>
+            </div>
+        </div>
+      </div>
+    </div>
   </mat-card-content>
-  <mat-card-actions>
-    <a mat-raised-button routerLink="" color="accent">Zaloguj</a>
-    <button mat-button color="accent">Informacje</button>
-  </mat-card-actions>
 </mat-card>
+
+
