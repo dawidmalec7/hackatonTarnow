@@ -38,7 +38,12 @@ namespace hackhathonTarnow
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("CorsPolicy"));
             });
+            services.AddDbContextPool<KudowaMySqlContext>(options => options.UseMySql("Server=192.168.1.99;Port=3306;Database=kudowa;User=root;Password=zaq1@WSX;", mysqlOptions =>
+            {
+                mysqlOptions.ServerVersion(new Version(10, 1, 32), ServerType.MySql); // replace with your Server Version and Type
+            }
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
