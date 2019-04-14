@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DefinedPlaces } from '../defined-places';
 import { MapStyle } from '../map-style';
+import * as MarkerClusterer from "@google/markerclusterer"
 
 
 declare var google;
@@ -61,6 +62,8 @@ export class MapComponent implements OnInit {
           });
         }
       }
+      let visibleMarkers = t.markers;
+      new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })
 
     }
 
