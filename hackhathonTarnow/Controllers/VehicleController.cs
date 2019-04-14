@@ -22,6 +22,7 @@ namespace hackhathonTarnow.Controllers
             _context = context;
         }
         [HttpPost]
+        
         public async Task<ActionResult<HttpResponseMessage>> VehiclesCreate([FromBody] Vehicle vehicle)
         {
             _context.Vehicles.Add(vehicle);
