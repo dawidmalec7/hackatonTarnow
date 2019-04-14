@@ -20,6 +20,6 @@ namespace hackhathonTarnow.Models
         public int NumberOfFreeCyclesPlaces { get; set; }
         public float Longtitude { get; set; }
         public float Latitude { get; set; }
-
+        public  ICollection<Vehicle> Vehicles { get; set; }
     }
 }
