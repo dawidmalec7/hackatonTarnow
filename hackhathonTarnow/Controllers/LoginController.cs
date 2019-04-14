@@ -68,8 +68,5 @@ namespace hackhathonTarnow.Controllers
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
         }
-
-        private object GenerateClientToken(User user)
-      
     }
 }
