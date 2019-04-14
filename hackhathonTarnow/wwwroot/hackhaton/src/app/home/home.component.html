@@ -30,7 +30,7 @@
         <div class="col-12 col-sm-6 bg-white">
           <div class="left-side-wrapper">
             <form class="login-form">
-              <mat-card-title>Witamy w parkIN</mat-card-title>
+              <mat-card-title>Witamy w <span>park</span><span>IN</span></mat-card-title>
               <mat-card-subtitle>Jedynej w Tarnowie aplikacji parkingowej</mat-card-subtitle>
               <mat-form-field class="form-field full-width">
                 <input matInput placeholder="Email" [(ngModel)]="user.Email" [formControl]="emailFormControl"
@@ -50,15 +50,14 @@
               </mat-form-field>
             </form>
              <mat-card-actions>
-              <a mat-raised-button (click)="login()" color="accent">Zaloguj</a>
-              <a mat-raised-button routerLink="map" color="primary">Mapa</a>
-              <a mat-raised-button routerLink="registration" color="primary">Rejestracja</a>
-              <button mat-button routerLink="info" color="accent">Informacje</button>
+              <a mat-flat-button (click)="login()" color="accent">Zaloguj</a>
+              <a mat-flat-button routerLink="registration" color="primary">Rejestracja</a>
+              <a mat-flat-button routerLink="map" color="primary">Mapa</a>
             </mat-card-actions>
           </div>
         </div>
         <div class="col-sm-6 image-wrapper">
-          <img class="stretch-image" src='../assets/tarnow1.jpg' />
+          <img class="stretch-image" src='../assets/user.svg' />
         </div>
       </div>
     </div>

@@ -21,6 +21,17 @@ body {
   .mat-toolbar-row, .mat-toolbar-single-row {
     height: unset;
   }
+
+  .mat-card-actions {
+    display: flex;
+    justify-content: flex-start;
+    a, button{
+      margin-right: 8px;
+      &:last-of-type{
+        margin-left: 16px;
+      }
+    }
+  }
 }
 .bg-image{
   background-position:center !important;
@@ -33,7 +44,7 @@ img{
 .image-wrapper{
   position: relative;
 }
-.stretch-image{
+.stretch-image {
   position: absolute;
   left: 0;
   right: 0;
@@ -44,7 +55,8 @@ img{
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  object-fit: cover
+  object-fit: contain;
+  padding: 40px;
 }
 
 .bg-white{

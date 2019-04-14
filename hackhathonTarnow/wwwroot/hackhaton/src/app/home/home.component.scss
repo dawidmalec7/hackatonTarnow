@@ -19,6 +19,15 @@
 
   .mat-card-title {
     padding-bottom: 15px;
+
+    > span:first-of-type {
+      color: #673ab7 ;font-weight: bolder;
+    }
+
+    > span:last-of-type {
+      color: #ffd740;
+      font-weight: bolder;
+    }
   }
 
   .image-wrapper {
@@ -77,6 +86,10 @@
     > span:last-of-type {
       color: #ffd740
     }
+
+    @media (max-width: 767.98px) {
+      font-size: 1.8em;
+    }
   }
 
   h2 {
@@ -85,6 +98,11 @@
     text-align: center;
     text-indent: -30%;
     margin-bottom: 1em;
+
+    @media (max-width: 767.98px) {
+      font-size: 1.5em;
+      text-indent: 0;
+    }
   }
 
   .slider {
@@ -107,6 +125,11 @@
         font-size: 1.3em;
         font-weight: 400;
         color: #49248c;
+        line-height: 1.4em;
+
+        @media (max-width: 767.98px) {
+          font-size: 1em;
+        }
 
         b {
           font-weight: bolder;
@@ -118,6 +141,10 @@
 
 @media (max-width: 767.98px) {
   .image-wrapper {
-    height: 300px;
+    height: 170px;
+
+    img {
+      padding: 10px;
+    }
   }
 } 
