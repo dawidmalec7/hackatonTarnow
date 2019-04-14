@@ -14,6 +14,10 @@ import { DefinedPlaces } from './defined-places';
 import { MapStyle } from './map-style';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+//http
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpAuthInterceptorService } from './http-auth-interceptor.service';
+
 //material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRippleModule } from '@angular/material/core';
 
 
 
@@ -44,6 +49,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     //material
     MatCardModule,
     MatButtonModule,
@@ -52,9 +58,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatIconModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatRippleModule
   ],
-  providers: [DefinedPlaces, MapStyle],
+  providers: [
+    DefinedPlaces,
+    MapStyle,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

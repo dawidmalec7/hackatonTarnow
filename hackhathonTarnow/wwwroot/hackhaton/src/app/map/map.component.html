@@ -3,7 +3,7 @@
     <div>
       <button mat-flat-button color="primary">Nabliższe wolne miejsce</button>
       <button mat-flat-button color="primary">Wyszukaj miejsce</button>
-      <div class="ex-button" (click)="filterPlaces()">
+      <div class="ex-button" (click)="filterPlaces()" matRipple [matRippleColor]="'rgba(255,255,255,.1)'">
         <span>Tylko wolne</span>
         <mat-slide-toggle color="accent"  [checked]="filtered" ></mat-slide-toggle>
       </div>
