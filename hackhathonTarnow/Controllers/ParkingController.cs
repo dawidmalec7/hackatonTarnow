@@ -23,7 +23,16 @@ namespace hackhathonTarnow.Controllers
         [HttpPost]
         public async Task<ActionResult<HttpResponseMessage>> ParkingCreate([FromBody] Parking parking)
         {
+            parking.Spaces = new List<Space>();
+            for(int i = 0; i<parking.NumberOfPlaces; i++)
+            {
+                parking.Spaces.Add(new Space
+                {
+                    IsBusy = false
+                });
+            }
             _context.Parkings.Add(parking);
+     
             await _context.SaveChangesAsync();
             return Ok("Dodano Parking");
         }
