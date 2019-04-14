@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using hackhathonTarnow.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace hackhathonTarnow.Context
             base.OnModelCreating(modelBuilder);
         }
 
-
+        public DbSet<User> Users { get; set; }
 
         public MySqlContext(DbContextOptions<MySqlContext> options) : base(options) { }
     }
