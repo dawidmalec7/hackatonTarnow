@@ -7,9 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { InfoComponent } from './info/info.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DefinedPlaces } from './defined-places';
 import { HttpClientModule } from '@angular/common/http';
+import { MapStyle } from './map-style';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 //material
 import { MatCardModule } from '@angular/material/card';
@@ -19,11 +24,8 @@ import { MapComponent } from './map/map.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { RegistrationComponent } from './registration/registration.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ClientPanelComponent } from './client-panel/client-panel.component';
-import { MapStyle } from './map-style';
 
 
 
@@ -52,6 +54,7 @@ import { MapStyle } from './map-style';
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
+    MatSlideToggleModule,
     MatProgressBarModule
   ],
   providers: [DefinedPlaces, MapStyle],

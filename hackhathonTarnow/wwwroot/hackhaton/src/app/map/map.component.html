@@ -3,14 +3,18 @@
     <div>
       <button mat-flat-button color="primary">Nabliższe wolne miejsce</button>
       <button mat-flat-button color="primary">Wyszukaj miejsce</button>
+      <div class="ex-button" (click)="filterPlaces()">
+        <span>Tylko wolne</span>
+        <mat-slide-toggle color="accent"  [checked]="filtered" ></mat-slide-toggle>
+      </div>
       <!--<button mat-flat-button color="primary">Wyloguj</button>-->
     </div>
     <div>
-      <button mat-flat-button color="primary">Ustawienia TKM</button>
+      <button mat-flat-button color="accent">Ustawienia TKM</button>
     </div>
   </div>
 </menu>
 <button mat-mini-fab color="primary" (click)="mapMenuVisible=!mapMenuVisible" class="map-button-toggle" [class.moved]="mapMenuVisible">
-  <mat-icon>{{mapMenuVisible ? 'close' :'more_vert'}}</mat-icon>
+  <mat-icon>{{mapMenuVisible ? 'close' :'menu'}}</mat-icon>
 </button>
 <div id="map" class="map" [class.full-width]="mapMenuVisible"></div>

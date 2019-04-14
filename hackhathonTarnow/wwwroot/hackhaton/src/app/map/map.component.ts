@@ -18,10 +18,18 @@ export class MapComponent implements OnInit {
   markers = [];
   map: any;
   mapMenuVisible = true;
+  filtered = false;
   constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle) { }
 
   ngOnInit() {
     var t = this;
+    let icon_free = {
+      url: '../../assets/car-green-min.png', size: new google.maps.Size(25, 42)
+    };
+    let icon_taken = {
+      url: '../../assets/car-red-min.png', size: new google.maps.Size(25, 42)
+    };
+
     function initMap() {
       t.map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: t.startLatitude, lng: t.startLongitude },
@@ -30,18 +38,33 @@ export class MapComponent implements OnInit {
       });
 
       for (let i = 0; i < t.definedPlaces.placRybny.length; i++) {
-        console.log(t.definedPlaces.placRybny[i]);
+        console.log(i);
         let pos = {
           lat: t.definedPlaces.placRybny[i][1],
           lng: t.definedPlaces.placRybny[i][0]
         };
-        t.markers[i] = new google.maps.Marker({ position: pos, map: t.map });
 
+        if (i == 2) {
+          t.markers[i] = new google.maps.Marker({
+            position: pos,
+            map: t.map,
+            title: 'zajete',
+            icon: icon_taken
+          });
+        }
+        else {
+          t.markers[i] = new google.maps.Marker({
+            position: pos,
+            map: t.map,
+            title: 'wolne',
+            icon: icon_free
+          });
+        }
       }
 
     }
 
-    initMap(); 
+    initMap();
     //let map = L.map('map').setView([this.startLatitude, this.startLongitude], 13);
     //let map  = L.map('map', {
     //  center: [this.startLatitude, this.startLongitude],
@@ -73,4 +96,27 @@ export class MapComponent implements OnInit {
 
   }
 
+
+  filterPlaces() {
+    console.log(this.map);
+    if (this.filtered == false) {
+      console.log('filtrowanie on');
+      this.filtered = true;
+      for (let j = 0; j < this.markers.length; j++) {
+        if (this.markers[j].title == 'zajete') {
+          this.markers[j].setVisible(false);
+        }
+        else {
+          this.markers[j].setVisible(true);
+        }
+      }
+    }
+    else {
+      this.filtered = false;
+      console.log('filtrowanie off');
+      for (let j = 0; j < this.markers.length; j++) {
+        this.markers[j].setVisible(true);
+      }
+    }
+  }
 }
