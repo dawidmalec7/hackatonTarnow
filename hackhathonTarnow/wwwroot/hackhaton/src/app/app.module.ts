@@ -12,6 +12,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 //material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MapComponent } from './map/map.component';
+import { DefinedPlaces } from './defined-places';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     HomeComponent,
     MenuComponent,
     InfoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [DefinedPlaces],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
