@@ -69,6 +69,14 @@
     font-weight: bolder;
     margin-bottom: 30px;
     text-indent: 0.5em;
+
+    > span:first-of-type {
+      color: #673ab7
+    }
+
+    > span:last-of-type {
+      color: #ffd740
+    }
   }
 
   h2 {

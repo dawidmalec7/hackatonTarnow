@@ -39,6 +39,7 @@ export class MapComponent implements OnInit {
   async getLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       console.info(position.coords.latitude, position.coords.longitude);
+      console.log('elo');
     });
   }
 
