@@ -2,18 +2,20 @@
   <div>
     <div>
       <button mat-flat-button color="primary">Nabliższe wolne miejsce</button>
-      <button mat-flat-button (click)="findPlace()" color="primary">Wyszukaj miejsce</button>
-      <input type="text" name="address" id="address">
-      <div class="ex-button" (click)="filterPlaces()" matRipple [matRippleColor]="'rgba(255,255,255,.1)'">
+      <div class="ex-button flex-v">
+        <input type="text" name="address" id="address">
+        <button mat-flat-button (click)="findPlace()" color="primary">Wyszukaj miejsce</button>
+      </div>
+      <div class="ex-button flex-h" (click)="filterPlaces()" matRipple [matRippleColor]="'rgba(255,255,255,.1)'">
         <span>Tylko wolne</span>
         <mat-slide-toggle color="accent"  [checked]="filtered" ></mat-slide-toggle>
       </div>
       <!--<button mat-flat-button color="primary">Wyloguj</button>-->
     </div>
-    <div>
-      <button mat-flat-button color="accent">Ustawienia TKM</button>
+      <div>
+        <button mat-flat-button color="accent">Ustawienia TKM</button>
+      </div>
     </div>
-  </div>
 </menu>
 <button mat-mini-fab color="primary" (click)="mapMenuVisible=!mapMenuVisible" class="map-button-toggle" [class.moved]="mapMenuVisible">
   <mat-icon>{{mapMenuVisible ? 'close' :'menu'}}</mat-icon>
