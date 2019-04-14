@@ -18,46 +18,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class RegistrationComponent implements OnInit {
-  // emailFormControl = new FormControl('', [
-  //     Validators.required,
-  //     Validators.email,
-  //   ]);
-  // numberFormControl = new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern('^[0-9]*$'),
-  //   ]);
-  // NameFormControl = new FormControl('', [
-  //     Validators.required
-  //   ]);
-  // SurnameFormControl = new FormControl('', [
-  //     Validators.required
-  //   ]);
-  // PasswordFormControl = new FormControl('', [
-  //     Validators.required
-  //   ]);
 
-  //   matcher = new MyErrorStateMatcher();
-
-  // registerForm = this.fb.group({
-  //   Name: ['', Validators.required],
-  //   Surname: ['', Validators.required],
-  //   Phone: ['', Validators.required],
-  //   Email: ['', Validators.required],
-  //   Password: ['', Validators.required],
-  //   //CardID: ['']
-  // })
-  // sendForm(formdata){
-  //   console.log(formdata);
-
-  //   //this.http.post('https://localhost:5001/api/register')
-  // }
-  // constructor(private http:HttpClient, private fb:FormBuilder) { 
-    
-  // }
-
-  // ngOnInit() {
-  // }
+  public onFormSubmit(form:NgForm) {
+    console.log(form);
+    this.http.post("https://localhost:5001/api/register", form, { responseType: 'text' }).subscribe(resp => {
+      console.log(resp);
+    });
   
+  }
+  ngOnInit() {
+  }
+  IsAccepted:Boolean = false;
   registerForm: FormGroup;  
   Name:string='';  
   Surname:string='';  
@@ -66,8 +37,7 @@ export class RegistrationComponent implements OnInit {
   Password:string='';  
   CardID: number=null;
   
-  constructor(private fb: FormBuilder) {   
-  
+  constructor(private fb: FormBuilder, private http: HttpClient) {   
   
     // To initialize FormGroup  
    this.registerForm = this.fb.group({
@@ -85,15 +55,10 @@ export class RegistrationComponent implements OnInit {
   onChange(event:any)  
   {  
     if (event.checked == true) {  
-      this.IsAccepted = 1;  
+      this.IsAccepted = true;  
     } else {  
-      this.IsAccepted = 0;  
+      this.IsAccepted = false;  
     }  
   }  
-  
-  // Executed When Form Is Submitted  
-  onFormSubmit(form:NgForm)  
-  {  
-    console.log(form);  
-  }  
+   
 }

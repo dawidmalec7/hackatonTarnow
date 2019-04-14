@@ -9,13 +9,13 @@
           </mat-error> 
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput name="Surname" formControlName="Surname" placeholder="Nazwisko">
+          <input matInput formControlName="Surname" placeholder="Nazwisko">
           <mat-error *ngIf="!registerForm.get('Surname').valid && registerForm.get('Surname').touched">
             Nazwisko jest <strong>wymagane</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput name="Phone" placeholder="Telefon" formControlName="Phone">
+          <input matInput placeholder="Telefon" formControlName="Phone">
          <!--  <mat-error *ngIf="!registerForm.get('Phone').valid && registerForm.get('Phone').touched">
             Wprowadz poprawny number telefonu.
           </mat-error>  -->
@@ -26,10 +26,12 @@
       </div>
       <div class="col-6">
         <mat-form-field class="form-field">
+
           <input matInput placeholder="Email" formControlName="Email">
           <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Wprowadz poprawny adres email.
-          </mat-error> -->
+          </mat-error> 
+        -->
           <mat-error *ngIf="!registerForm.get('Email').valid && registerForm.get('Email').touched">
             Email jest <strong>wymagany</strong>
           </mat-error>
@@ -41,10 +43,10 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput name="CardID" formControlName="CardID" placeholder="ID karty miejskiej">
+          <input matInput name="CardID" placeholder="ID karty miejskiej" >
         </mat-form-field>
       </div>
     </div>
-    <button mat-raised-button type= "submit" [disabled]="!registerForm.valid || IsAccepted==0" color="primary">Zarejestruj sie</button>
+    <button mat-raised-button type= "submit"  color="primary">Zarejestruj sie</button>
   </div>
 </form>

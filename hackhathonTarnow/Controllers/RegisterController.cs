@@ -24,6 +24,10 @@ namespace hackhathonTarnow.Controllers
         [HttpPost]
         public async Task<ActionResult<HttpResponseMessage>> UserRegister([FromBody] User user)
         {
+            try
+            {
+
+            
             User dbUser = _context.Users.Where(u => u.Email == user.Email).FirstOrDefault();
             if (dbUser != null) return Conflict("Użytkownik o takim adresie email już istnieje");
             var crypt = new CryptPassword();
@@ -33,6 +37,11 @@ namespace hackhathonTarnow.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok("Rejestracja przebiegła pomyślnie");
+            }
+            catch(Exception e)
+            {
+                return Conflict(e);
+            }
         }
     }
 }

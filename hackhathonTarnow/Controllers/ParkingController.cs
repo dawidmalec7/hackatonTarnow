@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using hackhathonTarnow.Context;
 using hackhathonTarnow.Models;
@@ -45,6 +46,7 @@ namespace hackhathonTarnow.Controllers
             var parking = await _context.Parkings.ToListAsync();
             return parking;
         }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<HttpResponseMessage>> GetParking([FromRoute] Guid Id)
@@ -52,5 +54,23 @@ namespace hackhathonTarnow.Controllers
             var parking = await _context.Parkings.Where(p => p.Id == Id).FirstOrDefaultAsync();
             return Ok(parking);
         }
+
+        [HttpPost] 
+        [Route("{id}")]
+        public async Task<ActionResult<HttpResponseMessage>> BuyPlace([FromRoute] Guid id, [FromBody] ParkingHistory parkingHistory)
+        {
+
+            parkingHistory.StartTime = DateTime.Now;
+            parkingHistory.EndTime = DateTime.Now.AddHours(parkingHistory.HowLong);
+            parkingHistory.ParkingId = id;
+            parkingHistory.UserId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var parking = await _context.Parkings.Where(p => p.Id == id).FirstOrDefaultAsync();
+            parking.NumberOfFreeCarsPlaces--;
+            _context.Parkings.Update(parking);
+            _context.ParkingHistories.Add(parkingHistory);
+            await _context.SaveChangesAsync();
+            return Ok("Wykupiono miejsce parkingowe");
+        }
+
     }
 }

@@ -33,8 +33,8 @@
               <mat-card-title>Witamy w parkIN</mat-card-title>
               <mat-card-subtitle>Jedynej w Tarnowie aplikacji parkingowej</mat-card-subtitle>
               <mat-form-field class="form-field full-width">
-                <input matInput placeholder="Email" [formControl]="emailFormControl"
-                       [errorStateMatcher]="matcher">
+                <input matInput placeholder="Email" [(ngModel)]="user.Email" [formControl]="emailFormControl"
+                 [errorStateMatcher]="matcher" >
                 <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                   Wprowadz poprawny adres email.
                 </mat-error>
@@ -43,14 +43,14 @@
                 </mat-error>
               </mat-form-field><br>
               <mat-form-field class="form-field full-width">
-                <input matInput placeholder="Password" type="password" [formControl]="PasswordFormControl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="emailFormControl.hasError('required')">
-                  Hasło jest <strong>wymagane</strong>
-                </mat-error>
+                <input matInput placeholder="Password" type="password" [formControl]="PasswordFormControl" [errorStateMatcher]="matcher" [(ngModel)]="user.password">
+                 <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Hasło jest <strong>wymagane</strong>
+                  </mat-error>
               </mat-form-field>
             </form>
-            <mat-card-actions>
-              <a mat-raised-button routerLink="clientPanel" color="accent">Zaloguj</a>
+             <mat-card-actions>
+              <a mat-raised-button (click)="login()" color="accent">Zaloguj</a>
               <a mat-raised-button routerLink="map" color="primary">Mapa</a>
               <a mat-raised-button routerLink="registration" color="primary">Rejestracja</a>
               <button mat-button routerLink="info" color="accent">Informacje</button>
