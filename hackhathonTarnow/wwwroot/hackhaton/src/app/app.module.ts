@@ -8,12 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { InfoComponent } from './info/info.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DefinedPlaces } from './defined-places';
 
 //material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MapComponent } from './map/map.component';
-import { DefinedPlaces } from './defined-places';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { DefinedPlaces } from './defined-places';
     BrowserAnimationsModule,
     //material
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [DefinedPlaces],
   bootstrap: [AppComponent]

@@ -4,8 +4,17 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.mat-card{
-  margin: 10px auto;
-  width: 100%;
-  max-width: 800px;
+
+
+//unmaterializer
+body {
+  .mat-card {
+    margin: 10px auto;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: unset;
+  }
 }
