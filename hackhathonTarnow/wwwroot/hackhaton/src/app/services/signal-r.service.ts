@@ -1,11 +1,13 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { numberOfPlaces } from '../models/numberOfPlaces';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SignalRService {
-  //messageReceived = new EventEmitter<ChatMessage>();
+
+export class signalRService {
+  messageReceived = new EventEmitter<numberOfPlaces>();
   connectionEstablished = new EventEmitter<Boolean>();
 
   private connectionIsEstablished = false;
@@ -13,6 +15,11 @@ export class SignalRService {
 
   constructor() {
     this.createConnection();
+    this.registerOnServerEvents();
+  }
+
+  public sendChatMessage(numberOfFreePlaces: number, numberOfFreeDisabledPlaces: number) {
+    this._hubConnection.invoke('SendNumberOfFreePlaces', numberOfFreePlaces);
   }
 
   private createConnection() {
@@ -38,7 +45,8 @@ export class SignalRService {
 
   private registerOnServerEvents(): void {
     this._hubConnection.on('ReceiveMessage', (data: any) => {
-      //this.messageReceived.emit(data);
+      this.messageReceived.emit(data);
+      console.log(data); 
     });
   }  
 }
