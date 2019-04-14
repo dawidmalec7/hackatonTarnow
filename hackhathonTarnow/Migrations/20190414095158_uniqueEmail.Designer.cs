@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hackhathonTarnow.Context;
 
 namespace hackhathonTarnow.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    partial class MySqlContextModelSnapshot : ModelSnapshot
+    [Migration("20190414095158_uniqueEmail")]
+    partial class uniqueEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,39 +68,6 @@ namespace hackhathonTarnow.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("hackhathonTarnow.Models.Vehicle", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CarPlate");
-
-                    b.Property<Guid?>("ParkingId");
-
-                    b.Property<Guid?>("UserId");
-
-                    b.Property<string>("VehicleType");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParkingId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Vehicles");
-                });
-
-            modelBuilder.Entity("hackhathonTarnow.Models.Vehicle", b =>
-                {
-                    b.HasOne("hackhathonTarnow.Models.Parking", "Parking")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("ParkingId");
-
-                    b.HasOne("hackhathonTarnow.Models.User", "User")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
