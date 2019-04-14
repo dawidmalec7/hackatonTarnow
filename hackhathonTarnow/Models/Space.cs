@@ -17,5 +17,7 @@ namespace hackhathonTarnow.Models
         public DateTime? EndTime { get; set; }
         public string Plate { get; set; }
         public Parking Parking{ get; set; }
+        public float Longtitude { get; set; }
+        public float Latitude { get; set; }
     }
 }
