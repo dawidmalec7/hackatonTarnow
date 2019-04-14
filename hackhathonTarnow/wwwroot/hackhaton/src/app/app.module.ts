@@ -8,11 +8,16 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { InfoComponent } from './info/info.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DefinedPlaces } from './defined-places';
 
 //material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MapComponent } from './map/map.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -22,7 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     HomeComponent,
     MenuComponent,
     InfoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +38,11 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     MatButtonModule,
     MatInputModule
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule
   ],
-  providers: [],
+  providers: [DefinedPlaces],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
