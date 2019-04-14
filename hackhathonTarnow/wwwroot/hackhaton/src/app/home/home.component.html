@@ -1,15 +1,44 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Witamy w parkIN</mat-card-title>
-    <mat-card-subtitle>Jedynej w Tarnowie aplikacji parkingowej</mat-card-subtitle>
-  </mat-card-header>
+<mat-card class="bg-image">
   <mat-card-content>
-    <p>
-      lorem ipsum dolor sit amet.
-    </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-6 bg-white">
+          <div class="left-side-wrapper">
+            <form class="login-form">
+              <mat-card-title>Witamy w parkIN</mat-card-title>
+              <mat-card-subtitle>Jedynej w Tarnowie aplikacji parkingowej</mat-card-subtitle>
+              <mat-form-field class="form-field full-width">
+                <input matInput placeholder="Email" [formControl]="emailFormControl"
+                 [errorStateMatcher]="matcher">
+                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                  Wprowadz poprawny adres email.
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  Email jest <strong>wymagany</strong>
+                </mat-error>
+              </mat-form-field><br>
+              <mat-form-field class="form-field full-width">
+                <input matInput placeholder="Password" type="password" [formControl]="PasswordFormControl" [errorStateMatcher]="matcher">
+                 <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Hasło jest <strong>wymagane</strong>
+                  </mat-error>
+              </mat-form-field>
+            </form>
+             <mat-card-actions>
+              <a mat-raised-button routerLink="clientPanel" color="accent">Zaloguj</a>
+              <a mat-raised-button routerLink="map" color="primary">Mapa</a>
+              <a mat-raised-button routerLink="registration" color="primary">Rejestracja</a>
+              <button mat-button routerLink="info" color="accent">Informacje</button>
+            </mat-card-actions>
+            </div>
+        </div>
+        <div class="col-sm-6 image-wrapper">
+          <img class="stretch-image" src='../assets/tarnow1.jpg' />
+        </div>
+      </div>
+    </div>
   </mat-card-content>
-  <mat-card-actions>
-    <a mat-raised-button routerLink="" color="accent">Zaloguj</a>
-    <button mat-button color="accent">Informacje</button>
-  </mat-card-actions>
 </mat-card>
+
+
+

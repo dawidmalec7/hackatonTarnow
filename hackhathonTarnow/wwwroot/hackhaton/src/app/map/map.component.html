@@ -1,0 +1,16 @@
+<menu class="map-menu" [class.hidden]="!mapMenuVisible">
+  <div>
+    <div>
+      <button mat-flat-button color="primary">Nabliższe wolne miejsce</button>
+      <button mat-flat-button color="primary">Wyszukaj miejsce</button>
+      <!--<button mat-flat-button color="primary">Wyloguj</button>-->
+    </div>
+    <div>
+      <button mat-flat-button color="primary">Ustawienia TKM</button>
+    </div>
+  </div>
+</menu>
+<button mat-mini-fab color="primary" (click)="mapMenuVisible=!mapMenuVisible" class="map-button-toggle" [class.moved]="mapMenuVisible">
+  <mat-icon>{{mapMenuVisible ? 'close' :'more_vert'}}</mat-icon>
+</button>
+<div id="map" class="map" [class.full-width]="mapMenuVisible"></div>

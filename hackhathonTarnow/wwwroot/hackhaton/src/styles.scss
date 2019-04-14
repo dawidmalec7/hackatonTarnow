@@ -1,10 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'reset';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+}
 
-.mat-card{
-  margin: 10px auto;
+
+
+//unmaterializer
+body {
+  .mat-card {
+    margin: 10px auto;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: unset;
+  }
+}
+.bg-image{
+  background-position:center !important;
+  background-size: cover;
+}
+img{
+  max-width: 100%;
+  height:auto;
+}
+.image-wrapper{
+  position: relative;
+}
+.stretch-image{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
   width: 100%;
-  max-width: 800px;
+  height: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover
+}
+
+.bg-white{
+  background-color: white;
 }

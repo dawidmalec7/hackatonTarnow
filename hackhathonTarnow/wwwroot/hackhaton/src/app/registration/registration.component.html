@@ -1,0 +1,54 @@
+<form class="registration-form container" >
+  <div class="form-fields">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="form-field">
+          <input matInput name="Name" placeholder="Imie" [formControl]="NameFormControl"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="numberFormControl.hasError('required')">
+            Imie jest <strong>wymagane</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput name="Surname" placeholder="Nazwisko" [formControl]="SurnameFormControl"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="numberFormControl.hasError('required')">
+            Nazwisko jest <strong>wymagane</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput name="Phone" placeholder="Telefon" [formControl]="numberFormControl"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="numberFormControl.hasError('email') && !numberFormControl.hasError('required')">
+            Wprowadz poprawny number telefonu.
+          </mat-error> 
+          <mat-error *ngIf="numberFormControl.hasError('required')">
+            Telefon jest <strong>wymagany</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Email" [formControl]="emailFormControl"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Wprowadz poprawny adres email.
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email jest <strong>wymagany</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput type="password" name="Password" placeholder="Hasło" [formControl]="PasswordFormControl" [errorStateMatcher]="matcher">
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Hasło jest <strong>wymagane</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput name="CartID" placeholder="ID karty miejskiej">
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary">Zarejestruj sie</button>
+  </div>
+</form>

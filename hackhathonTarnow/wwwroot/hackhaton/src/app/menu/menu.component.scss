@@ -1,0 +1,57 @@
+:host {
+  z-index: 999;
+}
+
+.mat-icon-button {
+  img {
+    height: 100%;
+  }
+
+  z-index: 2;
+}
+
+.mat-toolbar {
+  /*box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);*/
+  position: relative;
+  overflow: hidden;
+}
+
+menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 260px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: 0.4s;
+  background-color: #673ab7;
+  text-align: center;
+  color: white;
+  z-index: 10;
+  box-shadow: 0 0 10px black;
+  padding: 60px 10px 20px;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+
+  &.active {
+    transform: scaleX(1);
+  }
+
+
+  .close {
+    position: fixed;
+    top: 0;
+    left: 16px;
+  }
+}
+
+
+.loader {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 123;
+}

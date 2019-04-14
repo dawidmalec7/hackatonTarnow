@@ -1,3 +1,16 @@
-<p>
-  menu works!
-</p>
+<mat-progress-bar mode="indeterminate" class="loader" *ngIf="app.loading" color="accent"></mat-progress-bar>
+
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="app.toggleMenu()">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
+<menu [class.active]="app.menuVisible">
+    <button mat-icon-button (click)="app.toggleMenu()" class="close">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-button routerLink="">Home</button>
+    <button mat-button color="accent" routerLink="map">Mapa</button>
+    <button mat-button color="warn">Warn</button>
+    <button mat-button disabled>Disabled</button>
+</menu>
