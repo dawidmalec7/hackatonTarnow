@@ -44,14 +44,35 @@
   &-button {
     &-toggle {
       position: fixed;
-      margin-top: 5px;
-      left: 50px;
+      margin-top: 90px;
+      left: 15px;
       z-index: 450;
       transition: 0.4s;
-
       &.moved {
-        left: 15px;
+        transform: translateY(-85px);
       }
     }
+  }
+}
+
+.ex-button {
+  color: #fff;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  margin: 0 0 6px 0;
+  background-color: #673ab7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .mat-slide-toggle {
+    pointer-events: none;
   }
 }
