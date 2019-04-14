@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup,FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { HttpClient } from '@angular/common/http';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
@@ -37,11 +38,20 @@ export class RegistrationComponent implements OnInit {
 
     matcher = new MyErrorStateMatcher();
 
-  constructor() { 
+    public user = {};
+
+  constructor(public http: HttpClient) { 
 
 
   }
 
+  public sendData() {
+    console.log(this.user);
+    this.http.post("https://localhost:5001/api/register", this.user, { responseType: 'text' }).subscribe(resp => {
+      console.log(resp);
+    });
+  
+  }
   ngOnInit() {
   }
 
