@@ -18,6 +18,7 @@ import { MapComponent } from './map/map.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 
@@ -28,7 +29,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MenuComponent,
     InfoComponent,
     PageNotFoundComponent,
-    MapComponent
+    MapComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
