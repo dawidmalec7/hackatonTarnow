@@ -29,6 +29,7 @@ namespace hackhathonTarnow.Controllers
             var crypt = new CryptPassword();
             user.Role = "user";
             user.Password = crypt.EncodeText(user.Password);
+            user.CreatedDate = DateTime.Now;
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok("Rejestracja przebiegła pomyślnie");

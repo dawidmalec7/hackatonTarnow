@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using hackhathonTarnow.Context;
 using hackhathonTarnow.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,15 +22,18 @@ namespace hackhathonTarnow.Controllers
         {
             _context = context;
         }
+
         [HttpPost]
-        
+        [Authorize(Roles = "user")]
         public async Task<ActionResult<HttpResponseMessage>> VehiclesCreate([FromBody] Vehicle vehicle)
         {
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
             return Ok("Dodano pojazd");
         }
+
         [HttpGet]
+        [Authorize(Roles = "user")]
         public async Task<IEnumerable<Vehicle>> GetVehicle()
         {
             Guid userId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
