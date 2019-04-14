@@ -15,6 +15,7 @@ namespace hackhathonTarnow.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Parking> Parkings { get; set; }
 
         public MySqlContext(DbContextOptions<MySqlContext> options) : base(options) { }
     }
