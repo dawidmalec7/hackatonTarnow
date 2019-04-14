@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace hackhathonTarnow.Models
 {
-    public class Space
+    public class ParkingHistory
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public bool IsBusy { get; set; }
-        public string Plate { get; set; }
+        public Guid UserId { get; set; }
         public Guid ParkingId { get; set; }
-        public float Longtitude { get; set; }
-        public float Latitude { get; set; }
-        public string Type { get; set; }
+
+        public int HowLong { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+
     }
 }
