@@ -25,6 +25,7 @@ namespace hackhathonTarnow.Models
         public string Role { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        public DateTime? ActivationDate { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

@@ -5,9 +5,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using hackhathonTarnow.Code.Crypt;
 using hackhathonTarnow.Context;
+using hackhathonTarnow.Email.EmailController;
 using hackhathonTarnow.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace hackhathonTarnow.Controllers
 {
@@ -27,11 +29,21 @@ namespace hackhathonTarnow.Controllers
             User dbUser = _context.Users.Where(u => u.Email == user.Email).FirstOrDefault();
             if (dbUser != null) return Conflict("Użytkownik o takim adresie email już istnieje");
             var crypt = new CryptPassword();
-            user.Role = "user";
+             user.Role = "user";
             user.Password = crypt.EncodeText(user.Password);
             user.CreatedDate = DateTime.Now;
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+            var userId =await  _context.Users.Where(u => u.Email == user.Email).Select(e => e.Id).FirstOrDefaultAsync();
+            try
+            {
+                var email = new EmailController();
+                email.SendEmail(user.Email, "aktywacja konta", "test", userId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
             return Ok("Rejestracja przebiegła pomyślnie");
         }
     }
