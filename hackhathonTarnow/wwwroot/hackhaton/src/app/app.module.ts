@@ -28,7 +28,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
