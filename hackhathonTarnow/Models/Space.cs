@@ -16,5 +16,6 @@ namespace hackhathonTarnow.Models
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public string Plate { get; set; }
+        public Parking Parking{ get; set; }
     }
 }
