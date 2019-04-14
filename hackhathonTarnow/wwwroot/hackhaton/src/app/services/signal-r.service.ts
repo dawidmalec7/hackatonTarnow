@@ -5,7 +5,7 @@ import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
   providedIn: 'root'
 })
 export class SignalRService {
-  messageReceived = new EventEmitter<ChatMessage>();
+  //messageReceived = new EventEmitter<ChatMessage>();
   connectionEstablished = new EventEmitter<Boolean>();
 
   private connectionIsEstablished = false;
@@ -38,7 +38,7 @@ export class SignalRService {
 
   private registerOnServerEvents(): void {
     this._hubConnection.on('ReceiveMessage', (data: any) => {
-      this.messageReceived.emit(data);
+      //this.messageReceived.emit(data);
     });
   }  
 }
