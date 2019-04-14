@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DefinedPlaces } from './defined-places';
+import { HttpClientModule } from '@angular/common/http';
 import { MapStyle } from './map-style';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
