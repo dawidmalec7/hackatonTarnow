@@ -1,0 +1,19 @@
+:host {
+  overflow-x: hidden;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.app-main {
+  transition: 0.4s;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+
+  &.menu-visible {
+    transform: translateX(260px);
+  }
+}
