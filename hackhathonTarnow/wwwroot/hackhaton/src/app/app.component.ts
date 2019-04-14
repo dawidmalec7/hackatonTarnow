@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+
+
 import {
   Router,
   RouterEvent,
@@ -16,6 +19,7 @@ export class AppComponent {
   title = 'hackhaton';
   loading = false;
   menuVisible = false;
+
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
   }
@@ -24,6 +28,7 @@ export class AppComponent {
     this.menuVisible = false;
   }
 
+
   constructor(private router: Router) {
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
@@ -31,6 +36,14 @@ export class AppComponent {
     console.info("App is running, yay!");
     console.info("%cHave a nice day, human (ಠ‿↼)", "font-weight: bold");
   }
+
+ 
+
+  //private registerOnServerEvents(): void {
+  //  this._hubConnection.on('ReceiveMessage', (data: any) => {
+  //    this.messageReceived.emit(data);
+  //  });
+  //}
 
   //navigation
   navigationInterceptor(event: RouterEvent): void {

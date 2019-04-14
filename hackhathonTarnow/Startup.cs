@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using hackhathonTarnow.Context;
+using hackhathonTarnow.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,7 @@ namespace hackhathonTarnow
                 builder.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
+                .AllowCredentials()
                 .WithOrigins("http://localhost:4200");
             }));
 
@@ -87,7 +89,7 @@ namespace hackhathonTarnow
             app.UseHttpsRedirection();
             app.UseSignalR(routes =>
             {
-
+                routes.MapHub<CountController>("/count");
             });
 
             app.UseMvc();

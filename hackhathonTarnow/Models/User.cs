@@ -17,8 +17,8 @@ namespace hackhathonTarnow.Models
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
             ErrorMessage = "Nieprawidłowy email")]
         public string Email { get; set; }
-        [RegularExpression(@" ^ (?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$",
-         ErrorMessage = "Hasło nie spełnia wymagań.")]
+        //[RegularExpression(@" ^ (?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$",
+        // ErrorMessage = "Hasło nie spełnia wymagań.")]
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public string CardId { get; set; }

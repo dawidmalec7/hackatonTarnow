@@ -1,24 +1,24 @@
-<form class="registration-form container" >
+<form class="registration-form container" (ngSubmit)="sendData()">
   <div class="form-fields">
     <div class="row">
       <div class="col-6">
         <mat-form-field class="form-field">
-          <input matInput name="Name" placeholder="Imie" [formControl]="NameFormControl"
-                 [errorStateMatcher]="matcher">
+          <input matInput placeholder="Imie" [formControl]="NameFormControl"
+                 [errorStateMatcher]="matcher" [(ngModel)]="user.Name"  >
           <mat-error *ngIf="numberFormControl.hasError('required')">
             Imie jest <strong>wymagane</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput name="Surname" placeholder="Nazwisko" [formControl]="SurnameFormControl"
-                 [errorStateMatcher]="matcher">
+          <input matInput  placeholder="Nazwisko" [formControl]="SurnameFormControl"
+                 [errorStateMatcher]="matcher" [(ngModel)]="user.Surname"  >
           <mat-error *ngIf="numberFormControl.hasError('required')">
             Nazwisko jest <strong>wymagane</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput name="Phone" placeholder="Telefon" [formControl]="numberFormControl"
-                 [errorStateMatcher]="matcher">
+          <input matInput placeholder="Telefon" [formControl]="numberFormControl"
+                 [errorStateMatcher]="matcher" [(ngModel)]="user.PhoneNumber"  >
           <mat-error *ngIf="numberFormControl.hasError('email') && !numberFormControl.hasError('required')">
             Wprowadz poprawny number telefonu.
           </mat-error> 
@@ -30,7 +30,7 @@
       <div class="col-6">
         <mat-form-field class="form-field">
           <input matInput placeholder="Email" [formControl]="emailFormControl"
-                 [errorStateMatcher]="matcher">
+                 [errorStateMatcher]="matcher" [(ngModel)]="user.email"  >
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Wprowadz poprawny adres email.
           </mat-error>
@@ -39,13 +39,13 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput type="password" name="Password" placeholder="Hasło" [formControl]="PasswordFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="emailFormControl.hasError('required')">
+          <input matInput type="password" placeholder="Hasło" [formControl]="PasswordFormControl" [errorStateMatcher]="matcher" [(ngModel)]="user.Password">
+          <mat-error *ngIf="emailFormControl.hasError('required')"  >
             Hasło jest <strong>wymagane</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput name="CartID" placeholder="ID karty miejskiej">
+          <input matInput name="CardID" placeholder="ID karty miejskiej"  [(ngModel)]="user.cardId"  >
         </mat-form-field>
       </div>
     </div>
