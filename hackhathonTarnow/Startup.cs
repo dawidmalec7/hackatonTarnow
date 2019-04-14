@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,6 +26,18 @@ namespace hackhathonTarnow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithOrigins("http://localhost:4200");
+            }));
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("CorsPolicy"));
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -40,6 +53,10 @@ namespace hackhathonTarnow
                 app.UseHsts();
             }
 
+            app.UseDefaultFiles();
+            app.UseAuthentication();
+            app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
