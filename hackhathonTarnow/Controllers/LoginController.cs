@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using hackhathonTarnow.Code.Crypt;
 using hackhathonTarnow.Context;
 using hackhathonTarnow.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace hackhathonTarnow.Controllers
 {
@@ -24,12 +26,22 @@ namespace hackhathonTarnow.Controllers
         public async Task<ActionResult<HttpResponseMessage>> Login([FromBody] User user) {
             try
             {
-                return null;
+                User dbUser = await _context.Users.Where(u => u.Email == user.Email).FirstOrDefaultAsync();
+                if (dbUser == null) return Conflict("Użytkownik o takim adresie email nie istnieje");
+                var crypt = new CryptPassword();
+                if (dbUser.Password != crypt.EncodeText(user.Password)) return Conflict("Niepoprawne hasło, spróbuj ponownie");
+
+                return Ok(GenerateToken(dbUser));
             }
             catch(Exception e)
             {
                 return null;
             }
+        }
+
+        private object GenerateToken(User user)
+        {
+            return null;
         }
     }
 }
