@@ -29,6 +29,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { AttributionComponent } from './attribution/attribution.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { PwaService } from './pwa-service.service';
 
 
 @NgModule({
@@ -58,11 +61,13 @@ import { AttributionComponent } from './attribution/attribution.component';
     MatToolbarModule,
     MatSlideToggleModule,
     MatProgressBarModule,
-    MatRippleModule
+    MatRippleModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     DefinedPlaces,
     MapStyle,
+    PwaService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]

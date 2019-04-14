@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { PwaService } from '../pwa-service.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,11 +8,19 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  promptEvent;
+  constructor(public app: AppComponent, public Pwa: PwaService) { }
 
-  constructor(private app: AppComponent) { }
+  installPwa(): void {
+    //this.Pwa.promptEvent.prompt();
+  }
 
   ngOnInit() {
+
+    //window.addEventListener('beforeinstallprompt', event => {
+    //  this.promptEvent = event;
+    //});
   }
-  
+
 
 }

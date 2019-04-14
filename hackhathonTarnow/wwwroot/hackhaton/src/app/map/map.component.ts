@@ -20,9 +20,13 @@ export class MapComponent implements OnInit {
   map: any;
   mapMenuVisible = true;
   filtered = false;
+  mapStyleName = 'day';
   geocoder;
 
-  constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle) { }
+  constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle) {
+    this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
+    console.log(this.mapStyleName);
+  }
 
   ngOnInit() {
 
@@ -60,12 +64,12 @@ export class MapComponent implements OnInit {
 
   findClosestPlace(cords) {
     console.log(cords);
-    console.log(this.closestDistance(this.definedPlaces, cords[0], cords[1]));
+    //this.closestDistance(this.definedPlaces, cords[0], cords[1])
   } 
-
 
   initMap(findPlace) {
     var t = this;
+    var mapStyle = t.mapStyleName == 'day' ? t.mapStyle.day : t.mapStyle.night;
     let icon_free = {
       url: '../../assets/car-green-min.png', size: new google.maps.Size(25, 42)
     };
@@ -75,8 +79,11 @@ export class MapComponent implements OnInit {
 
     t.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: t.startLatitude, lng: t.startLongitude },
-      zoom: 13,
-      styles: t.mapStyle.style
+      zoom: 13, mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        position: google.maps.ControlPosition.TOP_RIGHT
+      },
+      styles: mapStyle
     });
 
     for (let i = 0; i < t.definedPlaces.placRybny.length; i++) {
@@ -161,5 +168,16 @@ export class MapComponent implements OnInit {
         this.markers[j].setVisible(true);
       }
     }
+  }
+
+  switchMapStyle() {
+    var newStyle = this.mapStyleName == 'day' ? 'night' : 'day';
+    this.mapStyleName = newStyle;
+    console.log(newStyle);
+    localStorage.setItem('mapstyle', newStyle);
+    var mapStyle = newStyle == 'day' ? this.mapStyle.day : this.mapStyle.night;
+
+    this.map.setOptions({ styles: mapStyle });
+
   }
 }

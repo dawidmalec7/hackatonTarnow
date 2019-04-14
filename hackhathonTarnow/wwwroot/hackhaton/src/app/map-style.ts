@@ -1,5 +1,5 @@
 export class MapStyle {
-  style = [
+  night = [
     { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
     { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
     { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
@@ -79,4 +79,5 @@ export class MapStyle {
       stylers: [{ color: '#17263c' }]
     }
   ];
+  day = [];
 }

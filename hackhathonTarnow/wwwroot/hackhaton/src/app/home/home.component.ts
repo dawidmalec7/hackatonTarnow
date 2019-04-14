@@ -31,7 +31,9 @@ export class HomeComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
   
-  public user = {};
+  public user = {
+    Email: null, password: null
+  };
   constructor(private http: HttpClient) {
     
   }
