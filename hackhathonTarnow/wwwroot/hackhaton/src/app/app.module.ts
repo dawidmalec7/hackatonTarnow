@@ -9,6 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 import { InfoComponent } from './info/info.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DefinedPlaces } from './defined-places';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //material
 import { MatCardModule } from '@angular/material/card';
@@ -18,6 +19,7 @@ import { MapComponent } from './map/map.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -34,13 +36,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     //material
     MatCardModule,
     MatButtonModule,
     MatInputModule,
     MatMenuModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatProgressBarModule
   ],
   providers: [DefinedPlaces],
   bootstrap: [AppComponent]

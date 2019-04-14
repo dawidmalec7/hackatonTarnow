@@ -12,7 +12,7 @@ export class MapComponent implements OnInit {
   startLatitude: number = 50.0138100;
   startLongitude: number = 20.9869800;
   map: any;
-
+  mapMenuVisible = true;
   constructor(private definedPlaces: DefinedPlaces) { }
 
   ngOnInit() {
