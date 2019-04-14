@@ -13,4 +13,4 @@
 <button mat-mini-fab color="primary" (click)="mapMenuVisible=!mapMenuVisible" class="map-button-toggle" [class.moved]="mapMenuVisible">
   <mat-icon>{{mapMenuVisible ? 'close' :'more_vert'}}</mat-icon>
 </button>
-<mat-card id="map" class="map" [class.full-width]="mapMenuVisible"></mat-card>
+<div id="map" class="map" [class.full-width]="mapMenuVisible"></div>

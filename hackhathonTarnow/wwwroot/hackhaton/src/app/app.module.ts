@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RegistrationComponent } from './registration/registration.component';
+import { MapStyle } from './map-style';
 
 
 
@@ -49,7 +50,7 @@ import { RegistrationComponent } from './registration/registration.component';
     MatToolbarModule,
     MatProgressBarModule
   ],
-  providers: [DefinedPlaces],
+  providers: [DefinedPlaces, MapStyle],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
