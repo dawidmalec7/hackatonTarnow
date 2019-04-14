@@ -14,8 +14,7 @@
   overflow: auto;
   position: relative;
 
-  &::before {
-    content: '';
+  .overlay{
     position: absolute;
     top: 0;
     left: 0;
@@ -32,7 +31,7 @@
   &.menu-visible {
     transform: translateX(260px);
 
-    &::before {
+    .overlay{
       opacity: 1;
       pointer-events: auto;
     }

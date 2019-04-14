@@ -1,6 +1,10 @@
+
+
 :host {
   width: 100%;
   max-height: 100%;
+  padding: 0px 0 20px;
+  /*background-image: url('../../assets/pattern.jpg');*/
 }
 .mat-card {
   padding: 0;
@@ -20,6 +24,86 @@
   .image-wrapper {
     > img {
       border-radius: 4px;
+    }
+  }
+}
+
+.full-card {
+  width: 100%;
+  background-image: url('../../assets/baner-bg.jpg');
+  margin-top: 0;
+  border-radius: 0 0 4px 4px;
+  max-width: 100%;
+  background-size: cover;
+
+  .wrapper {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+
+    > p {
+      font-size: 1.2em;
+      text-align: right;
+      margin-bottom: 1.6em;
+      font-weight: bold;
+      text-indent: 2em;
+
+      a {
+        color: #ffd740;
+        font-weight: 500;
+        background: rgba(0, 0, 0, 0.37);
+      }
+
+      > span {
+        display: block;
+        font-size: 1.2em;
+        text-align: left;
+        margin-top: 0.2em;
+        font-weight: 300;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 3em;
+    font-weight: bolder;
+    margin-bottom: 30px;
+    text-indent: 0.5em;
+  }
+
+  h2 {
+    font-size: 2em;
+    font-weight: bolder;
+    text-align: center;
+    text-indent: -30%;
+    margin-bottom: 1em;
+  }
+
+  .slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2em;
+
+    > div {
+      width: 30%;
+      text-align: center;
+
+      img {
+        width: 60%;
+      }
+
+      p {
+        padding: 10px;
+        font-size: 1.3em;
+        font-weight: 400;
+        color: #49248c;
+
+        b {
+          font-weight: bolder;
+        }
+      }
     }
   }
 }

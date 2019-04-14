@@ -1,3 +1,28 @@
+<mat-card class="full-card">
+  <div class="wrapper">
+    <h1>parkIN - parkuj sprawnie!</h1>
+    <h2>Jak to działa?</h2>
+    <div class="slider">
+      <div *ngFor="let slide of howTo; index as i">
+        <img src="../../assets/how{{i+1}}.svg" />
+        <p [innerHtml]="slide"></p>
+      </div>
+    </div>
+    <h2>Nie potrzebujesz niczego więcej!</h2>
+    <p>
+      Płać za bilety parkingowe swoją kartą miejską!
+      <span>Zaloguj się w aplikacji za pomocą konta <a href="http://www.ekarta.umt.tarnow.pl/">Tarnowskiej Karty Miejskiej</a> i płać za miejsca parkingowe korzystając ze zniżek.</span>
+    </p>
+    <p>
+      Intuicyjne oprogramowanie
+      <span>W systemie odnajdziesz się bardzo szybko - interfejs mapy Google zapewnia intuicyjne i responsywne poruszanie się po aplikacji.</span>
+    </p>
+    <p>
+      Noś aplikację w swojej kieszeni
+      <span>Dodaj skrót do strony na swoim smartfonie z Androidem, a będzie działać jak aplikacja mobilna.</span>
+    </p>
+  </div>
+</mat-card>
 <mat-card class="bg-image">
   <mat-card-content>
     <div class="container">
@@ -9,7 +34,7 @@
               <mat-card-subtitle>Jedynej w Tarnowie aplikacji parkingowej</mat-card-subtitle>
               <mat-form-field class="form-field full-width">
                 <input matInput placeholder="Email" [formControl]="emailFormControl"
-                 [errorStateMatcher]="matcher">
+                       [errorStateMatcher]="matcher">
                 <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                   Wprowadz poprawny adres email.
                 </mat-error>
@@ -19,18 +44,18 @@
               </mat-form-field><br>
               <mat-form-field class="form-field full-width">
                 <input matInput placeholder="Password" type="password" [formControl]="PasswordFormControl" [errorStateMatcher]="matcher">
-                 <mat-error *ngIf="emailFormControl.hasError('required')">
-                    Hasło jest <strong>wymagane</strong>
-                  </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  Hasło jest <strong>wymagane</strong>
+                </mat-error>
               </mat-form-field>
             </form>
-             <mat-card-actions>
+            <mat-card-actions>
               <a mat-raised-button routerLink="clientPanel" color="accent">Zaloguj</a>
               <a mat-raised-button routerLink="map" color="primary">Mapa</a>
               <a mat-raised-button routerLink="registration" color="primary">Rejestracja</a>
               <button mat-button routerLink="info" color="accent">Informacje</button>
             </mat-card-actions>
-            </div>
+          </div>
         </div>
         <div class="col-sm-6 image-wrapper">
           <img class="stretch-image" src='../assets/tarnow1.jpg' />

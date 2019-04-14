@@ -23,6 +23,23 @@ export class MapComponent implements OnInit {
   constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle) { }
 
   ngOnInit() {
+    
+
+    this.getLocation().then(
+      () => {
+        this.initMap();
+      }
+    );
+  
+  }
+
+  async getLocation() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.info(position.coords.latitude, position.coords.longitude);
+    });
+  }
+
+  initMap() {
     var t = this;
     let icon_free = {
       url: '../../assets/car-green-min.png', size: new google.maps.Size(25, 42)
@@ -31,7 +48,6 @@ export class MapComponent implements OnInit {
       url: '../../assets/car-red-min.png', size: new google.maps.Size(25, 42)
     };
 
-    function initMap() {
       t.map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: t.startLatitude, lng: t.startLongitude },
         zoom: 13,
@@ -65,40 +81,8 @@ export class MapComponent implements OnInit {
       let visibleMarkers = t.markers;
       new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })
 
-    }
-
-    initMap();
-    //let map = L.map('map').setView([this.startLatitude, this.startLongitude], 13);
-    //let map  = L.map('map', {
-    //  center: [this.startLatitude, this.startLongitude],
-    //  zoom: 13,
-    //  minZoom: 11,
-    //  maxZoom: 18
-    //});
-    //let places = this.definedPlaces.placRybny;
-    //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    //}).addTo(map);
-
-    //for (let i = 0; i < places.length; i++) {
-    //  console.log(places[i]);
-    //  var icon_free = L.icon({
-    //    iconUrl: '../../assets/car-green.png',
-    //    iconSize: [10, 19],
-    //    iconAnchor: [7, 16],
-    //    popupAnchor: [1, -20],
-    //  });
-
-    //  L.marker([places[i][1], places[i][0]], { icon: icon_free }).addTo(map)
-    //    .bindPopup('Miejsce ' + (i + 1) + '/' + places.length);
-    //}
-    //function onMapClick(e) {
-    //  console.log("You clicked the map at " + e.latlng);
-    //}
-    //map.on('click', onMapClick);
-
+    
   }
-
 
   filterPlaces() {
     console.log(this.map);
