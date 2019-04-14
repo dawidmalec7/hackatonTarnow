@@ -20,17 +20,20 @@ export class MapComponent implements OnInit {
   map: any;
   mapMenuVisible = true;
   filtered = false;
+  geocoder;
+
   constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle) { }
 
   ngOnInit() {
     
-
     this.getLocation().then(
       () => {
-        this.initMap();
+        this.initMap(this.findPlace);
+        
       }
     );
-  
+           this.geocoder = new google.maps.Geocoder();
+
   }
 
   async getLocation() {
@@ -40,7 +43,21 @@ export class MapComponent implements OnInit {
     });
   }
 
-  initMap() {
+ findPlace() {
+    let t = this;
+    let address = document.getElementById('address').value;
+    this.geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        t.map.setCenter(results[0].geometry.location);
+        t.map.zoom = 16;
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
+
+  initMap(findPlace) {
     var t = this;
     let icon_free = {
       url: '../../assets/car-green-min.png', size: new google.maps.Size(25, 42)
@@ -79,11 +96,42 @@ export class MapComponent implements OnInit {
           });
         }
       }
+      var mcOptions = {gridSize: 60, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 2};
       let visibleMarkers = t.markers;
-      new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })
+      new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' },mcOptions)
 
-    
+
+    //  document.getElementById('findPlace').addEventListener('click', function() {
+    //    findPlace(geocoder, this.map);
+    //  });
   }
+  
+closestDistance(parkCords, geo_lat, geo_lon){
+  let distances = [];
+  parkCords.forEach(function(location, i) {
+   distances[i] = {
+      distance: this.calculateDistance(geo_lat, geo_lon, location.lat, location.lng),
+      city: location.title
+    }
+  });
+  let closestLoc = distances.reduce((prev, current) => (prev.distance < current.distance) ? prev : current);
+  
+  return closestLoc;
+}
+
+ calculateDistance(lat1, lon1, lat2, lon2) {
+  if (lat1 === '' || lon1 === '' || lat2 === '' || lon2 === '') {
+    return 999999999999;
+  }
+
+  var p = 0.017453292519943295;
+  var c = Math.cos;
+  var a = 0.5 - c((lat2 - lat1) * p) / 2 +
+    c(lat1 * p) * c(lat2 * p) *
+    (1 - c((lon2 - lon1) * p)) / 2;
+
+  return 12742 * Math.asin(Math.sqrt(a));
+}
 
   filterPlaces() {
     console.log(this.map);
