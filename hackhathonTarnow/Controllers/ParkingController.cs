@@ -28,10 +28,17 @@ namespace hackhathonTarnow.Controllers
             return Ok("Dodano Parking");
         }
         [HttpGet]
-        public async Task<IEnumerable<Parking>> GetParking()
+        public async Task<IEnumerable<Parking>> GetParkings()
         {
             var parking = await _context.Parkings.ToListAsync();
             return parking;
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<HttpResponseMessage>> GetParking([FromRoute] Guid Id)
+        {
+            var parking = await _context.Parkings.Where(p => p.Id == Id).FirstOrDefaultAsync();
+            return Ok(parking);
         }
     }
 }
