@@ -9,14 +9,14 @@ using hackhathonTarnow.Context;
 namespace hackhathonTarnow.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20190414074923_vehicles")]
-    partial class vehicles
+    [Migration("20190414124550_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("hackhathonTarnow.Models.Parking", b =>
@@ -45,6 +45,32 @@ namespace hackhathonTarnow.Migrations
                     b.ToTable("Parkings");
                 });
 
+            modelBuilder.Entity("hackhathonTarnow.Models.Space", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("EndTime");
+
+                    b.Property<bool>("IsBusy");
+
+                    b.Property<float>("Latitude");
+
+                    b.Property<float>("Longtitude");
+
+                    b.Property<Guid?>("ParkingId");
+
+                    b.Property<string>("Plate");
+
+                    b.Property<DateTime?>("StartTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParkingId");
+
+                    b.ToTable("Spaces");
+                });
+
             modelBuilder.Entity("hackhathonTarnow.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -52,15 +78,21 @@ namespace hackhathonTarnow.Migrations
 
                     b.Property<string>("CardId");
 
+                    b.Property<DateTime>("CreatedDate");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("PESEL");
-
                     b.Property<string>("Password");
 
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("Role");
+
                     b.Property<string>("Surname");
+
+                    b.Property<DateTime?>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -89,10 +121,17 @@ namespace hackhathonTarnow.Migrations
                     b.ToTable("Vehicles");
                 });
 
+            modelBuilder.Entity("hackhathonTarnow.Models.Space", b =>
+                {
+                    b.HasOne("hackhathonTarnow.Models.Parking", "Parking")
+                        .WithMany("Spaces")
+                        .HasForeignKey("ParkingId");
+                });
+
             modelBuilder.Entity("hackhathonTarnow.Models.Vehicle", b =>
                 {
                     b.HasOne("hackhathonTarnow.Models.Parking", "Parking")
-                        .WithMany("Vehicles")
+                        .WithMany()
                         .HasForeignKey("ParkingId");
 
                     b.HasOne("hackhathonTarnow.Models.User", "User")

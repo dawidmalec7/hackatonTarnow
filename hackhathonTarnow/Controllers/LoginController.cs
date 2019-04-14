@@ -43,7 +43,11 @@ namespace hackhathonTarnow.Controllers
             }
             catch(Exception e)
             {
-                return null;
+                var objectError = new {
+                    Client = "Wystąpił błąd po stronie serwera, prosimy skontaktować się z administratorem lub spróbować ponownie później",
+                    Error = e
+                };
+                return Conflict(objectError);
             }
         }
 
