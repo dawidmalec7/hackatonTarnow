@@ -64,30 +64,12 @@ namespace hackhathonTarnow.Controllers
             {
                 tokenExpires = DateTime.Now.AddDays(30),
                 claims,
-                role = "admin",
+                role = user.Role,
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
         }
 
         private object GenerateClientToken(User user)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecurityKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(issuer: "localhost:44348", audience: "localhost:44348", claims: claims, expires: DateTime.Now.AddDays(30), signingCredentials: creds);
-
-            return Ok(new
-            {
-                tokenExpires = DateTime.Now.AddDays(30),
-                claims,
-                token = new JwtSecurityTokenHandler().WriteToken(token)
-            });
-        }
+      
     }
 }

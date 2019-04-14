@@ -11,14 +11,6 @@ namespace hackhathonTarnow.Context
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.HasIndex(e => new
-                {
-                    e.Email
-                }).IsUnique();
-            });
-
             base.OnModelCreating(modelBuilder);
         }
 
