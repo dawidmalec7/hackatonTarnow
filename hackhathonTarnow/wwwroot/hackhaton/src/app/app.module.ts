@@ -23,6 +23,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
+import { MapStyle } from './map-style';
+
 
 
 @NgModule({
@@ -51,7 +53,7 @@ import { ClientPanelComponent } from './client-panel/client-panel.component';
     MatToolbarModule,
     MatProgressBarModule
   ],
-  providers: [DefinedPlaces],
+  providers: [DefinedPlaces, MapStyle],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
