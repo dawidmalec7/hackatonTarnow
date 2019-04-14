@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
-import { InfoComponent } from './info/info.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -29,6 +28,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
+import { AttributionComponent } from './attribution/attribution.component';
 
 
 @NgModule({
@@ -36,11 +36,11 @@ import { MatRippleModule } from '@angular/material/core';
     AppComponent,
     HomeComponent,
     MenuComponent,
-    InfoComponent,
     PageNotFoundComponent,
     MapComponent,
     RegistrationComponent,
-    ClientPanelComponent
+    ClientPanelComponent,
+    AttributionComponent
   ],
   imports: [
     BrowserModule,
