@@ -9,6 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 import { InfoComponent } from './info/info.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DefinedPlaces } from './defined-places';
+import { HttpClientModule } from '@angular/common/http';
 
 //material
 import { MatCardModule } from '@angular/material/card';
@@ -43,6 +44,7 @@ import { MapStyle } from './map-style';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     //material
     MatCardModule,
     MatButtonModule,
