@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RegistrationComponent } from './registration/registration.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapStyle } from './map-style';
 
 
