@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hackhathonTarnow.Context;
 
 namespace hackhathonTarnow.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    partial class MySqlContextModelSnapshot : ModelSnapshot
+    [Migration("20190414072315_parking")]
+    partial class parking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,18 +49,6 @@ namespace hackhathonTarnow.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CardId");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("PESEL");
-
-                    b.Property<string>("Password");
-
-                    b.Property<string>("Surname");
 
                     b.HasKey("Id");
 
