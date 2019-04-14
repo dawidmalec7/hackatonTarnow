@@ -20,6 +20,6 @@ namespace hackhathonTarnow.Models
         [Range(000000000, 999999999)]
         public int PESEL { get; set; }
         public string CardId { get; set; }
-
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }
