@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using hackhathonTarnow.Context;
 using hackhathonTarnow.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace hackhathonTarnow.Controllers
             _context = context;
         }
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<HttpResponseMessage>> ParkingCreate([FromBody] Parking parking)
         {
             _context.Parkings.Add(parking);
@@ -28,11 +30,11 @@ namespace hackhathonTarnow.Controllers
             return Ok("Dodano Parking");
         }
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IEnumerable<Parking>> GetParking()
         {
             var parking = await _context.Parkings.ToListAsync();
             return parking;
         }
     }
-}
 }
