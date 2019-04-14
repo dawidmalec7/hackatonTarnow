@@ -1,8 +1,57 @@
 :host {
   width: 100%;
   max-height: 100%;
+  z-index: 1;
+  display: flex;
 }
-.map{
-  height: 800px;
-  max-height: 50vh;
+
+.map-menu {
+  width: 260px;
+  height: 100%;
+  transition: width 0.4s;
+  padding: 10px;
+
+  &.hidden {
+    width: 0;
+    padding: 10px 0;
+  }
+
+  > div {
+    padding-top: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  button {
+    margin-bottom: 6px;
+  }
+}
+
+.map {
+  flex: 1;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  transition: 0.4s;
+
+  &-button {
+    &-toggle {
+      position: fixed;
+      margin-top: 5px;
+      left: 50px;
+      z-index: 450;
+      transition: 0.4s;
+
+      &.moved {
+        left: 15px;
+      }
+    }
+  }
 }

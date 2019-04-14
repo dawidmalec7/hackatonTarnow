@@ -1,6 +1,6 @@
-<!--<mat-progress-bar mode="indeterminate" class="loader" *ngIf="loading" color="primary"></mat-progress-bar>-->
 <app-menu></app-menu>
 
-<main class="app-main" [class.menu-visible]="menuVisible">
+
+<main class="app-main" [class.menu-visible]="menuVisible" (click)="closeMenu()">
   <router-outlet></router-outlet>
 </main>
