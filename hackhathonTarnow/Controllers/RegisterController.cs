@@ -20,15 +20,18 @@ namespace hackhathonTarnow.Controllers
         {
             _context = context;
         }
+
         [HttpPost]
         public async Task<ActionResult<HttpResponseMessage>> UserRegister([FromBody] User user)
         {
+            User dbUser = _context.Users.Where(u => u.Email == user.Email).FirstOrDefault();
+            if (dbUser != null) return Conflict("Użytkownik o takim adresie email już istnieje");
             var crypt = new CryptPassword();
+            user.Role = "user";
             user.Password = crypt.EncodeText(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok("Rejestracja przebiegła pomyślnie");
         }
-
     }
 }
