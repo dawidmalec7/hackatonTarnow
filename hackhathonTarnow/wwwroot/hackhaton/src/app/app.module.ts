@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 
@@ -30,7 +31,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MenuComponent,
     InfoComponent,
     PageNotFoundComponent,
-    MapComponent
+    MapComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
