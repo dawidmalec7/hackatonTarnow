@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hackhaton';
+  menuVisible = false;
+  toggleMenu() {
+    this.menuVisible = !this.menuVisible;
+  }
 }
