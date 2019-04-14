@@ -13,10 +13,12 @@ import { DefinedPlaces } from './defined-places';
 //material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MapComponent } from './map/map.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     //material
     MatCardModule,
     MatButtonModule,
+    MatInputModule
     MatMenuModule,
     MatIconModule,
     MatToolbarModule
