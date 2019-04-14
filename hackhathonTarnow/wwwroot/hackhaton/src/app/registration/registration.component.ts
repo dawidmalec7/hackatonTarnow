@@ -2,12 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup,FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
-
-const emailVailidators = [Validators.required, Validators.email];
-const numberValidators = [Validators.required, Validators.pattern('^[0-9]*$')];
-const requiredValidators = [Validators.required];
-
-/** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -23,16 +17,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class RegistrationComponent implements OnInit {
-
-  //  registrationForm = new FormGroup({
-  //   Name: new FormControl('', requiredValidators),
-  //   Surname: new FormControl('', requiredValidators),
-  //   Phone: new FormControl('', numberValidators),
-  //   Email: new FormControl('', emailVailidators),
-  //   // Password: new FormControl(''),
-  //   // CartID: new FormControl(''),
-  // });
-
   emailFormControl = new FormControl('', [
       Validators.required,
       Validators.email,

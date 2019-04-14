@@ -22,6 +22,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClientPanelComponent } from './client-panel/client-panel.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InfoComponent,
     PageNotFoundComponent,
     MapComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ClientPanelComponent
   ],
   imports: [
     BrowserModule,
