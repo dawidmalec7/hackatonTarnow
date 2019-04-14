@@ -21,7 +21,7 @@ namespace hackhathonTarnow.Controllers
         }
 
 
-        public  Task SendNumberOfFreePlaces(int numberOfFreePlaces)
+        public Task SendNumberOfFreePlaces(int numberOfFreePlaces)
         {
             return Clients.All.SendAsync("ReceiveMessage", numberOfFreePlaces);
         }

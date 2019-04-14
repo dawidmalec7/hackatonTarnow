@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { MapStyle } from './map-style';
 import { HttpClientModule } from '@angular/common/http';
+import { SymulationComponent } from './symulation/symulation.component';
 
 
 
@@ -36,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     PageNotFoundComponent,
     MapComponent,
     RegistrationComponent,
-    ClientPanelComponent
+    ClientPanelComponent,
+    SymulationComponent
   ],
   imports: [
     BrowserModule,
