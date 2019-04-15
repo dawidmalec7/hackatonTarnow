@@ -36,12 +36,21 @@ export class MapComponent implements OnInit {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
     this.geocoder = new google.maps.Geocoder();
     this.directionsService = new google.maps.DirectionsService();
+    this.refreshTimeOut(15000);
+  }
+
+  refreshTimeOut(time){
+    setInterval(() => {
+        this.refresh();
+    }, time);
   }
 
   ngOnInit() {
+    this.refresh();
+  }
+  refresh(){
     this.fetch();
   }
-
   getLocation() {
     var t = this;
     let address = (<any>document.querySelector('#address')).value;
