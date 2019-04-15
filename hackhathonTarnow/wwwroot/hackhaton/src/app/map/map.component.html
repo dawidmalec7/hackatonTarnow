@@ -24,4 +24,15 @@
 <button mat-mini-fab color="primary" (click)="mapMenuVisible=!mapMenuVisible" class="map-button-toggle" [class.moved]="mapMenuVisible">
   <mat-icon>{{mapMenuVisible ? 'close' :'menu'}}</mat-icon>
 </button>
-<div id="map" class="map" [class.full-width]="mapMenuVisible"></div>
+<div id="map" class="map" [class.full-width]="mapMenuVisible" [class.collapse]="detailsVisible"></div>
+<div class="place-details" [class.visible]="detailsVisible">
+  <div>
+    <button mat-flat-button color="accent" (click)="detailsVisible=false">Schowaj</button>
+    <h2>Parking</h2>
+    <h1>{{parkingDetails.address}}</h1>
+    <p><span>Łączna liczba miejsc: </span><span>{{parkingDetails.numberOfPlaces}}</span></p>
+    <p><span>Łączna wolnych miejsc: </span><span>{{parkingDetails.numberOfFreePlaces}}</span></p>
+    <p><span>Wolnych miejsc dla niepełnosprawnych: </span><span>{{parkingDetails.numberOfFreeDisabledPlaces}}</span></p>
+    <p><span>Wolnych miejsc rowerowych: </span><span>{{parkingDetails.numberOfFreeCyclesPlaces}}</span></p>
+  </div>
+</div>

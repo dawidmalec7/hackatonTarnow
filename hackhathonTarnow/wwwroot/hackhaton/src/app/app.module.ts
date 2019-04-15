@@ -29,10 +29,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { AttributionComponent } from './attribution/attribution.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatSelectModule } from '@angular/material/select';
+
 import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { SymulationComponent } from './symulation/symulation.component';
+import { TicketComponent } from './ticket/ticket.component';
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import { SymulationComponent } from './symulation/symulation.component';
     RegistrationComponent,
     ClientPanelComponent,
     AttributionComponent,
-    SymulationComponent
+    SymulationComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,7 @@ import { SymulationComponent } from './symulation/symulation.component';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatSelectModule,
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
