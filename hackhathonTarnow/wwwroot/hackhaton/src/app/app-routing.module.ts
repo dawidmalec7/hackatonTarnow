@@ -6,7 +6,7 @@ import { MapComponent } from './map/map.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { AttributionComponent } from './attribution/attribution.component';
-import { SymulationComponent } from './symulation/symulation.component';
+import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
 
 
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'clientPanel', component: ClientPanelComponent },
   { path: 'attribution', component: AttributionComponent },
-  { path: 'simulation', component: SymulationComponent },
+  { path: 'simulation', component: SimulationComponent },
   { path: 'activation/:id', component: ActivationComponent },
   //{ path: 'works', redirectTo: "works/" },
   {
@@ -29,4 +29,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

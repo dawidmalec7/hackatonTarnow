@@ -1,0 +1,23 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #673ab7;
+    width: 250px;
+    height: 250px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: 500ms;
+    &:hover {
+      background-color: #e9e8ec;
+    }
+  }
+}

@@ -32,7 +32,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
-import { SymulationComponent } from './symulation/symulation.component';
+import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
 
 
@@ -46,7 +46,7 @@ import { ActivationComponent } from './activation/activation.component';
     RegistrationComponent,
     ClientPanelComponent,
     AttributionComponent,
-    SymulationComponent,
+    SimulationComponent,
     ActivationComponent
   ],
   imports: [

@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { numberOfPlaces } from '../models/NumberOfPlaces';
 
 @Component({
   selector: 'app-symulation',
-  templateUrl: './symulation.component.html',
-  styleUrls: ['./symulation.component.scss']
+  templateUrl: './simulation.component.html',
+  styleUrls: ['./simulation.component.scss']
 })
-export class SymulationComponent implements OnInit {
+export class SimulationComponent implements OnInit {
 
-  public parking;
+  public parkings;
   public spaces;
   constructor(private http: HttpClient) { 
+
+  }
+
+  ngOnInit() {
     this.getParking();
   }
 
@@ -21,14 +24,11 @@ export class SymulationComponent implements OnInit {
       this.getParking();
     });
   }
+
   getParking(){
     this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
       console.log(resp);
-      this.spaces = resp[0].spaces;
+      this.parkings = resp; 
     });
   }
-
-  ngOnInit() {
-  }
-
 }
