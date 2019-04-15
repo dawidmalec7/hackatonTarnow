@@ -35,7 +35,7 @@ namespace hackhathonTarnow.Controllers
                 var crypt = new CryptPassword();
                 User userDb = await _context.Users.Where(u => u.Id == users.Id).FirstOrDefaultAsync();
                 userDb.Name = users.Name;
-                userDb.Surname = users.Surname; 
+                userDb.Surname = users.Surname;
                 userDb.Password = crypt.EncodeText(users.Password);
                 userDb.PhoneNumber = users.PhoneNumber;
                 userDb.UpdatedDate = DateTime.Now;
@@ -67,11 +67,20 @@ namespace hackhathonTarnow.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<User> GetUsersAsync()
         {
-            Guid userId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            var user = await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
-            return user;
+            try
+            {
+                Guid userId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                var user = await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
         }
     }
 }
