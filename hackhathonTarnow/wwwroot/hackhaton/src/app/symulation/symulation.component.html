@@ -1,1 +1,7 @@
-<button (click)="sendMessage()"></button>
+
+<li *ngFor="let space of spaces; let i = index">
+    <div class="ex-button flex-h" matRipple [matRippleColor]="'rgba(255,255,255,.1)'">
+      <span>Miejsce {{space.id}}</span>
+      <mat-slide-toggle color="accent" [checked]="" (click)="updatePlace(space.id)"></mat-slide-toggle>
+    </div>
+</li>

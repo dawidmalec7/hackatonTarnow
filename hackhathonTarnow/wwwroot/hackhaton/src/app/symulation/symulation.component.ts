@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { signalRService } from '../services/signal-r.service';
-import { numberOfPlaces } from '../models/NumberOfPlaces';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-symulation',
   templateUrl: './symulation.component.html',
@@ -9,15 +7,23 @@ import { numberOfPlaces } from '../models/NumberOfPlaces';
 })
 export class SymulationComponent implements OnInit {
 
-  private signalR: signalRService = new signalRService();
+  public parking;
+  public spaces;
+  constructor(private http: HttpClient) { 
+    this.getParking();
+  }
 
-  constructor() { }
-
-  public sendMessage() {
-    var x = 15;
-    var y = 2;
-  
-    this.signalR.sendChatMessage(x, y);
+  updatePlace(id:string) {
+    this.http.put("https://localhost:5001/api/parking/" + id, {}).subscribe(resp => {
+      console.log(resp);
+      this.getParking();
+    });
+  }
+  getParking(){
+    this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
+      console.log(resp);
+      this.spaces = resp[0].spaces;
+    });
   }
   ngOnInit() {
   }
