@@ -1,14 +1,18 @@
 <menu class="map-menu" [class.hidden]="!mapMenuVisible">
   <div>
     <div>
-      <button mat-flat-button color="primary" (click)="findNearPlace()" >Nabliższe wolne miejsce</button>
+      <button mat-flat-button color="primary" (click)="getLocation()" >Nabliższe wolne miejsce</button>
       <div class="ex-button flex-v">
-        <input type="text" name="address" id="address">
+        <input type="text" name="address" id="address" (ngModelChange)="isEmpty()">
         <button mat-flat-button (click)="findPlace()" color="primary">Wyszukaj miejsce</button>
       </div>
       <div class="ex-button flex-h" (click)="filterPlaces()" matRipple [matRippleColor]="'rgba(255,255,255,.1)'">
         <span>Tylko wolne</span>
         <mat-slide-toggle color="accent" [checked]="filtered"></mat-slide-toggle>
+      </div>
+      <div class="ex-button flex-h" (click)="filterHandicapped()" matRipple [matRippleColor]="'rgba(255,255,255,.1)'">
+        <span>Miejsa dla inwalidów</span>
+        <mat-slide-toggle color="accent" [checked]="filteredHandicapped"></mat-slide-toggle>
       </div>
       <div class="ex-button flex-h" (click)="switchMapStyle()" matRipple [matRippleColor]="'rgba(255,255,255,.1)'">
         <span>Tryb nocny</span>

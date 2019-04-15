@@ -5,9 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppComponent } from '../app.component';
 import * as MarkerClusterer from "@google/markerclusterer"
 
-
 declare var google;
-//declare var google;
 
 @Component({
   selector: 'app-map',
@@ -24,6 +22,7 @@ export class MapComponent implements OnInit {
   detailsVisible;
   mapMenuVisible = window.innerWidth>700 ? true : false;
   filtered = false;
+  filteredHandicapped = false;
   mapStyleName = 'day';
   geocoder;
   parkings = [];
@@ -43,13 +42,26 @@ export class MapComponent implements OnInit {
     this.fetch();
   }
 
-  getLocation(geocoder) {
+  getLocation() {
     var t = this;
-    navigator.geolocation.getCurrentPosition( (position) => {
-      this.nearParking = this.findNearPlace(position.coords.latitude, position.coords.longitude);
-      this.calcRoute(position.coords.latitude, position.coords.longitude, this.nearParking.lat, this.nearParking.lng);
-      console.log()
-    });
+    let address = (<any>document.querySelector('#address')).value;
+    if(address !== ""){
+      this.geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status === 'OK') {
+         navigator.geolocation.getCurrentPosition( (position) => {
+          this.nearParking = t.findNearPlace(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+          t.calcRoute(position.coords.latitude, position.coords.longitude, this.nearParking.lat, this.nearParking.lng);
+        });
+        } else {
+          alert('Wystąpił błąd wyszukiwania: ' + status);
+        }  
+      });  
+    }else{
+      navigator.geolocation.getCurrentPosition( (position) => {
+        this.nearParking = this.findNearPlace(position.coords.latitude, position.coords.longitude);
+        this.calcRoute(position.coords.latitude, position.coords.longitude, this.nearParking.lat, this.nearParking.lng);
+      });
+    }
   }
 
   calcRoute(start_lat, start_lng, end_lat, end_lng) {
@@ -73,7 +85,6 @@ export class MapComponent implements OnInit {
 
   async getParking() {
     this.http.get(this.app.apiuri + "api/parking").subscribe(resp => {
-      console.log(resp);
       (<any>resp).forEach((parking, i) => {
         this.parkings[i] = resp[i];
       })
@@ -98,17 +109,15 @@ export class MapComponent implements OnInit {
     this.geocoder.geocode({ 'address': address }, function (results, status) {
       if (status === 'OK') {
         let location = [results[0].geometry.location.lat(), results[0].geometry.location.lng()];
-        //t.findClosestPlace(location);
         t.map.setCenter(results[0].geometry.location);
-        t.map.zoom = 16;
+        t.map.zoom = 14;
       } else {
         alert('Wystąpił błąd wyszukiwania: ' + status);
       }
     });
   }
 
-  findNearPlace(lat, lng) {
-      this.getLocation(this.geocoder);
+  findNearPlace(lat, lng){
       return this.closestDistance(this.parkings, lat, lng)
   }
  
@@ -144,11 +153,11 @@ export class MapComponent implements OnInit {
 
     let counter = 0;
     for (let i = 0; i < t.parkings.length; i++) {
-      console.log(t.parkings[i]);
       let parkingPos = {
         lat: t.parkings[i].longtitude - 0.0002,
         lng: t.parkings[i].latitude - 0.0002
       }
+
       t.parkingMarkers[i] = new google.maps.Marker({
         position: parkingPos,
         map: t.map,
@@ -157,7 +166,6 @@ export class MapComponent implements OnInit {
       });
       t.parkingMarkers[i].addListener('click', function () {
         t.parkingDetails = t.parkings[i];
-        console.log(t.parkingDetails );
         t.detailsVisible = true;
       });
       for (let j = 0; j < t.parkings[i].spaces.length; j++) {
@@ -166,12 +174,13 @@ export class MapComponent implements OnInit {
           lng: t.parkings[i].spaces[j].latitude
 
         }
-
+        
         if (t.parkings[i].spaces[j].isBusy) {
           t.markers[counter] = new google.maps.Marker({
             position: pos,
             map: t.map,
             title: 'zajete',
+            type: t.parkings[i].spaces[j].spaceType,
             icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType+'-red-min.png', size: new google.maps.Size(25, 42) }
           });
         } else {
@@ -179,6 +188,7 @@ export class MapComponent implements OnInit {
             position: pos,
             map: t.map,
             title: 'wolne',
+            type: t.parkings[i].spaces[j].spaceType,
             icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType+'-green-min.png', size: new google.maps.Size(25, 42)}
           });
         }
@@ -227,9 +237,7 @@ export class MapComponent implements OnInit {
   }
 
   filterPlaces() {
-    console.log(this.map);
     if (this.filtered == false) {
-      console.log('filtrowanie on');
       this.filtered = true;
       for (let j = 0; j < this.markers.length; j++) {
         if (this.markers[j].title == 'zajete') {
@@ -242,7 +250,26 @@ export class MapComponent implements OnInit {
     }
     else {
       this.filtered = false;
-      console.log('filtrowanie off');
+      for (let j = 0; j < this.markers.length; j++) {
+        this.markers[j].setVisible(true);
+      }
+    }
+  }
+
+   filterHandicapped() {
+    if (this.filteredHandicapped == false) {
+      this.filteredHandicapped = true;
+      for (let j = 0; j < this.markers.length; j++) {
+        if (this.markers[j].type == 'car') {
+          this.markers[j].setVisible(false);
+        }
+        else {
+          this.markers[j].setVisible(true);
+        }
+      }
+    }
+    else {
+      this.filteredHandicapped = false;
       for (let j = 0; j < this.markers.length; j++) {
         this.markers[j].setVisible(true);
       }
@@ -252,7 +279,6 @@ export class MapComponent implements OnInit {
   switchMapStyle() {
     var newStyle = this.mapStyleName == 'day' ? 'night' : 'day';
     this.mapStyleName = newStyle;
-    console.log(newStyle);
     localStorage.setItem('mapstyle', newStyle);
     var mapStyle = newStyle == 'day' ? this.mapStyle.day : this.mapStyle.night;
 
