@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DefinedPlaces } from '../defined-places';
 import { MapStyle } from '../map-style';
 import { HttpClient } from '@angular/common/http';
-//import * as MarkerClusterer from "@google/markerclusterer"
+import * as MarkerClusterer from "@google/markerclusterer"
 
 
 declare var google;
@@ -28,12 +28,13 @@ export class MapComponent implements OnInit {
   constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient) {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
     console.log(this.mapStyleName);
+    this.getParking();
   }
 
   ngOnInit() {
-    this.getLocation().then(() => this.getParking()).then(() => this.initMap(this.findPlace));
+    this.getLocation();
     this.geocoder = new google.maps.Geocoder();
-
+    this.getConditionalDataUsingPromise();
   }
 
   async getLocation() {
@@ -44,11 +45,23 @@ export class MapComponent implements OnInit {
   }
 
   async getParking(){
-    this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
+   this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
       console.log(resp); 
       (<any>resp).forEach((parking, i) => {
         this.parkings[i] = resp[i];
       })
+    });
+  }
+
+  getConditionalDataUsingPromise() {
+    this.http.get("https://localhost:5001/api/parking").toPromise().then(resp => {
+      (<any>resp).forEach((parking, i) => {
+        this.parkings[i] = resp[i];
+      })
+
+      if (this.parkings.length) {
+          this.initMap(this.findPlace);
+      }
     });
   }
 
@@ -90,43 +103,47 @@ export class MapComponent implements OnInit {
       },
       styles: mapStyle
     });
-
+         console.log('dupa');
+         let counter = 0;
     for (let i = 0; i < t.parkings.length; i++) {
       //console.log(i);
-
       for (let j = 0; j < t.parkings[i].spaces.length; j++) {
         let pos = {
-          lat: t.parkings[i].spaces.latitude,
-          lng: t.parkings[i].spaces.longitude
-        };
+          lat: t.parkings[i].spaces[j].longtitude,
+          lng: t.parkings[i].spaces[j].latitude
 
-        if (i == 2) {
-          t.markers[i] = new google.maps.Marker({
+        }
+        console.log(pos);
+
+        if (t.parkings[i].spaces[j].isBusy) {
+          t.markers[counter] = new google.maps.Marker({
             position: pos,
             map: t.map,
             title: 'zajete',
             icon: icon_taken
           });
-        }
-        else {
-          t.markers[i] = new google.maps.Marker({
+        } else {
+          t.markers[counter] = new google.maps.Marker({
             position: pos,
             map: t.map,
             title: 'wolne',
             icon: icon_free
           });
         }
+        counter++;
+        console.log(t.markers)
       }
     }
     var mcOptions = { gridSize: 60, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 2 };
     let visibleMarkers = t.markers;
-    //new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' }, mcOptions)
+    new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' }, mcOptions)
 
 
     //  document.getElementById('findPlace').addEventListener('click', function() {
     //    findPlace(geocoder, this.map);
     //  });
   }
+
 
   closestDistance(parkCords, geo_lat, geo_lon) {
     let distances = [];
