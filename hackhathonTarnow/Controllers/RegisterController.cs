@@ -28,29 +28,27 @@ namespace hackhathonTarnow.Controllers
         {
             try
             {
-
-            
-            User dbUser = _context.Users.Where(u => u.Email == user.Email).FirstOrDefault();
-            if (dbUser != null) return Conflict("Użytkownik o takim adresie email już istnieje");
-            var crypt = new CryptPassword();
-             user.Role = "user";
-            user.Password = crypt.EncodeText(user.Password);
-            user.CreatedDate = DateTime.Now;
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            var userId =await  _context.Users.Where(u => u.Email == user.Email).Select(e => e.Id).FirstOrDefaultAsync();
-            try
-            {
-                var email = new EmailController();
-                email.SendEmail(user.Email, "aktywacja konta", "test", userId);
+                User dbUser = _context.Users.Where(u => u.Email == user.Email).FirstOrDefault();
+                if (dbUser != null) return Conflict("Użytkownik o takim adresie email już istnieje");
+                var crypt = new CryptPassword();
+                user.Role = "user";
+                user.Password = crypt.EncodeText(user.Password);
+                user.CreatedDate = DateTime.Now;
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                var userId = await _context.Users.Where(u => u.Email == user.Email).Select(e => e.Id).FirstOrDefaultAsync();
+                try
+                {
+                    var email = new EmailController();
+                    email.SendEmail(user.Email, "aktywacja konta", "test", userId);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                return Ok("Rejestracja przebiegła pomyślnie");
             }
             catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return Ok("Rejestracja przebiegła pomyślnie");
-            }
-            catch(Exception e)
             {
                 return Conflict(e);
             }
