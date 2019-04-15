@@ -42,7 +42,6 @@ namespace hackhathonTarnow.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IEnumerable<Parking>> GetParking()
         {
             var parking = await _context.Parkings.Include(p => p.Spaces).ToListAsync();

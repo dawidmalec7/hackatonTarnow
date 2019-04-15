@@ -66,7 +66,7 @@ namespace hackhathonTarnow
             }))
             ;
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSignalR();
+   
 
         }
 
@@ -87,10 +87,7 @@ namespace hackhathonTarnow
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<CountController>("/count");
-            });
+      
 
             app.UseMvc();
         }

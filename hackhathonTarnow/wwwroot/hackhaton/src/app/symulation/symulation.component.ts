@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { numberOfPlaces } from '../models/NumberOfPlaces';
 
 @Component({
@@ -8,7 +9,24 @@ import { numberOfPlaces } from '../models/NumberOfPlaces';
 })
 export class SymulationComponent implements OnInit {
 
-  constructor() { }
+  public parking;
+  public spaces;
+  constructor(private http: HttpClient) { 
+    this.getParking();
+  }
+
+  updatePlace(id:string) {
+    this.http.put("https://localhost:5001/api/parking/" + id, {}, {responseType: 'text'}).subscribe(resp => {
+      console.log(resp);
+      this.getParking();
+    });
+  }
+  getParking(){
+    this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
+      console.log(resp);
+      this.spaces = resp[0].spaces;
+    });
+  }
 
   ngOnInit() {
   }

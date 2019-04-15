@@ -28,7 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { AttributionComponent } from './attribution/attribution.component';
-//import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
@@ -64,7 +64,7 @@ import { SymulationComponent } from './symulation/symulation.component';
     MatSlideToggleModule,
     MatProgressBarModule,
     MatRippleModule,
-    //ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     DefinedPlaces,
