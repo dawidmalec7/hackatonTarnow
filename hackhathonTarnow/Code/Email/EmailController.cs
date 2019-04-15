@@ -23,7 +23,7 @@ namespace hackhathonTarnow.Email.EmailController
         {
         }
 
-        public async void SendEmail(string address, string title, string body, Guid id)
+        public async void SendEmail(string address, string title, Guid id)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace hackhathonTarnow.Email.EmailController
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential(_configuration["Email"], _configuration["Password "])
                 };
-                using (var message = new MailMessage(_configuration["EmailLogin"], address)
+                using (var message = new MailMessage(_configuration["Email"], address)
                 {
                     Subject = title,
                     Body = "http://localhost:4200/api/activation/" + id,
