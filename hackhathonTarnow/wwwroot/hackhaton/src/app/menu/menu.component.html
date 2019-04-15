@@ -16,8 +16,8 @@
       <!--<button mat-button *ngIf="Pwa.promptEvent" (click)="installPwa()">
     Zainstaluj jako aplikację
   </button>-->
-      <button mat-flat-button (click)="app.logout()" color="accent" *ngIf="app.logged">Wyloguj</button>
       <button mat-button color="accent" routerLink="settings" *ngIf="app.logged">Ustawienia</button>
+      <button mat-flat-button (click)="app.logout()" color="accent" *ngIf="app.logged">Wyloguj</button>
     </div>
     <div class="att">
 

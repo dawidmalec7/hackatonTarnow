@@ -9,9 +9,7 @@ import {
 export class HttpAuthInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let token = localStorage.getItem("token");
-    console.log(token);
     const clonedRequest = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
-    console.log(clonedRequest);
     
     return next.handle(clonedRequest);
   }
