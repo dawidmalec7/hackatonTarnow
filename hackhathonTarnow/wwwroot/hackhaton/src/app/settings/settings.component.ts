@@ -11,32 +11,39 @@ import { AppComponent } from '../app.component';
 export class SettingsComponent implements OnInit {
   public onFormSubmit(form: NgForm) {
     console.log(form);
-    this.http.post(this.app.apiuri + "api/register", form, { responseType: 'text' }).subscribe(resp => {
+    this.http.put(this.app.apiuri + "api/users", form, { responseType: 'text' }).subscribe(resp => {
       console.log(resp);
     });
-
   }
+
+  public userForm;
   ngOnInit() {
   }
   IsAccepted: Boolean = false;
-  userForm: FormGroup;
-  Name: string = '';
-  Surname: string = '';
-  Phone: number = null;
-  Email: string = '';
-  Password: string = '';
-  CardID: number = null;
   constructor(private fb: FormBuilder, private http: HttpClient, private app: AppComponent) {
-
-    // To initialize FormGroup  
     this.userForm = this.fb.group({
       Name: ['', Validators.required],
       Surname: ['', Validators.required],
-      Phone: ['', Validators.required],
-      Email: [{ value: '', disabled: true }, Validators.required],
+      PhoneNumber: ['', Validators.required],
+      Email: [{ value:'', disabled: true }, Validators.required],
       Password: ['', Validators.required],
-      CardID: ['']
-    })
+      DefaultPlate: ['', Validators.required],
+      CardId: ['']
+    });
+    this.http.get("https://localhost:5001/api/users").subscribe(resp => {
+      // To initialize FormGroup
+      console.log(resp);
+      this.userForm = this.fb.group({
+        Name: [(<any>resp).name, Validators.required],
+        Surname: [(<any>resp).surname, Validators.required],
+        PhoneNumber: [(<any>resp).phoneNumber, Validators.required],
+        Email: [{ value: (<any>resp).email, disabled: true }, Validators.required],
+        DefaultPlate: [ (<any>resp).plate],
+        Password: ['', Validators.required],
+        CardId: ['']
+      })
+    });
+
 
   }
 }
