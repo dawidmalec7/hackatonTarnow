@@ -1,7 +1,7 @@
 <menu class="map-menu" [class.hidden]="!mapMenuVisible">
   <div>
     <div>
-      <button mat-flat-button color="primary">Nabliższe wolne miejsce</button>
+      <button mat-flat-button color="primary" (click)="findNearPlace()" >Nabliższe wolne miejsce</button>
       <div class="ex-button flex-v">
         <input type="text" name="address" id="address">
         <button mat-flat-button (click)="findPlace()" color="primary">Wyszukaj miejsce</button>
