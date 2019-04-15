@@ -23,6 +23,8 @@ namespace hackhathonTarnow.Models
         public string PhoneNumber { get; set; }
         public string CardId { get; set; }
         public string Role { get; set; }
+        public bool IsActivated { get; set; }
+        public bool? IsPremium { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? ActivationDate { get; set; }

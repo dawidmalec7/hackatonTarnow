@@ -12,7 +12,7 @@ namespace hackhathonTarnow.Email.EmailController
     public class EmailController
     {
         private IConfiguration _configuration { get; set; }
- 
+
 
         public EmailController(IConfiguration configuration)
         {
@@ -33,12 +33,14 @@ namespace hackhathonTarnow.Email.EmailController
                     Port = 587,
                     EnableSsl = true,
                     UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(_configuration["Email"], _configuration["Password "])
+                    Credentials = new NetworkCredential(_configuration["Email"], _configuration["Password"])
                 };
                 using (var message = new MailMessage(_configuration["Email"], address)
                 {
                     Subject = title,
-                    Body = "http://localhost:4200/api/activation/" + id,
+                    Body = "" +
+                    "<h1>Witaj</h1>" +
+                    "<p>Aby aktywować konto kliknij w link <a href='http://localhost:4200/activation/" + id + "'>Link</a></p>",
                     IsBodyHtml = true
                 })
                 {

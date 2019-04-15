@@ -1,0 +1,7 @@
+<section class="container">
+  <div class="box" *ngFor="let space of spaces; index as i" (click)="updatePlace(space.id)">
+    <ul>
+      <li>{{space.isBusy}}</li>
+    </ul>
+  </div>
+</section>

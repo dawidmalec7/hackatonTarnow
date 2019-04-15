@@ -6,27 +6,32 @@ import { MapComponent } from './map/map.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { AttributionComponent } from './attribution/attribution.component';
-import { SymulationComponent } from './symulation/symulation.component';
+import { SimulationComponent } from './simulation/simulation.component';
+import { ActivationComponent } from './activation/activation.component';
+import { SpacesComponent } from './simulation/spaces/spaces.component';
 import { TicketComponent } from './ticket/ticket.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'map', component: MapComponent },
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'clientPanel', component: ClientPanelComponent },
-  { path: 'attribution', component: AttributionComponent },
-  { path: 'ticket', component: TicketComponent },
-  { path: 'simulation', component: SymulationComponent },
-  //{ path: 'works', redirectTo: "works/" },
-  {
-    path: '**',
-    component: PageNotFoundComponent
-  }
+    { path: '', component: HomeComponent },
+    { path: 'map', component: MapComponent },
+    { path: 'registration', component: RegistrationComponent },
+    { path: 'clientPanel', component: ClientPanelComponent },
+    { path: 'attribution', component: AttributionComponent },
+    { path: 'simulation', component: SimulationComponent },
+    { path: 'activation/:id', component: ActivationComponent },
+    { path: 'ticket', component: TicketComponent },
+    { path: 'space/:id', component: SpacesComponent },
+    //{ path: 'works', redirectTo: "works/" },
+    {
+        path: '**',
+        component: PageNotFoundComponent
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

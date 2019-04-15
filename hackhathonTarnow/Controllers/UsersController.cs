@@ -65,5 +65,13 @@ namespace hackhathonTarnow.Controllers
             _context.Users.Remove(user);
             return Ok("Użytkownik został usunięty");
         }
+
+        [HttpGet]
+        public async Task<User> GetUsersAsync()
+        {
+            Guid userId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var user = await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+            return user;
+        }
     }
 }
