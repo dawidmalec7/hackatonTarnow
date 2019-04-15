@@ -31,7 +31,10 @@ export class AppComponent {
   }
 
   logout() {
-    console.warn('logout');
+    localStorage.removeItem("token");
+    localStorage.removeItem("tokenExpires");
+    this.logged = false;
+    this.router.navigate(['/']);
   }
 
 
