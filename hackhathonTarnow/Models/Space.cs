@@ -17,6 +17,6 @@ namespace hackhathonTarnow.Models
         public Guid ParkingId { get; set; }
         public float Longtitude { get; set; }
         public float Latitude { get; set; }
-        public string Type { get; set; }
+        public string SpaceType { get; set; }
     }
 }

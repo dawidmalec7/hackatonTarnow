@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using hackhathonTarnow.Context;
+using hackhathonTarnow.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,7 @@ namespace hackhathonTarnow
                 builder.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
+                .AllowCredentials()
                 .WithOrigins("http://localhost:4200");
             }));
 
@@ -58,7 +60,7 @@ namespace hackhathonTarnow
                                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))
                             };
                         });
-            services.AddDbContextPool<MySqlContext>(options => options.UseMySql("Server=127.0.0.1;Port=3306;Database=parkings;User=root;Password=zaq1@WSX;", mysqlOptions =>
+            services.AddDbContextPool<MySqlContext>(options => options.UseMySql("Server=127.0.0.1;Port=3306;Database=parkings;User=root;Password=q1w2e3r4;", mysqlOptions =>
             {
                 mysqlOptions.ServerVersion(new Version(10, 1, 32), ServerType.MySql); // replace with your Server Version and Type
             }))
@@ -87,7 +89,7 @@ namespace hackhathonTarnow
             app.UseHttpsRedirection();
             app.UseSignalR(routes =>
             {
-
+                routes.MapHub<CountController>("/count");
             });
 
             app.UseMvc();

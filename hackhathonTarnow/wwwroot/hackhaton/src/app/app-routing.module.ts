@@ -6,6 +6,8 @@ import { MapComponent } from './map/map.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { AttributionComponent } from './attribution/attribution.component';
+import { SymulationComponent } from './symulation/symulation.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +15,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'clientPanel', component: ClientPanelComponent },
   { path: 'attribution', component: AttributionComponent },
+  { path: 'simulation', component: SymulationComponent },
   //{ path: 'works', redirectTo: "works/" },
   {
     path: '**',
