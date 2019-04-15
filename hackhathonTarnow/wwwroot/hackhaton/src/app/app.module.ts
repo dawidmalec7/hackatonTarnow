@@ -32,10 +32,6 @@ import { AttributionComponent } from './attribution/attribution.component';
 import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ClientPanelComponent } from './client-panel/client-panel.component';
-import { MapStyle } from './map-style';
-import { HttpClientModule } from '@angular/common/http';
 import { SymulationComponent } from './symulation/symulation.component';
 
 
@@ -73,7 +69,7 @@ import { SymulationComponent } from './symulation/symulation.component';
   providers: [
     DefinedPlaces,
     MapStyle,
-    //PwaService,
+    PwaService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
