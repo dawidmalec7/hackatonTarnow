@@ -2,7 +2,7 @@
   <h1>Bilety parkingowe</h1>
   <p>Podaj swoje podstawowe dane i wybierz czas ważności biletu. <b>Nie musisz szukać parkometru!</b></p>
   <h2>Wypełnij formularz</h2>
-  <h2 class="right" *ngIf="user.isPremium">Posiadasz Tarnowską Kartę Premium. Ceny zostały obniżone.</h2>
+  <h2 class="right">Posiadasz Tarnowską Kartę Premium. Ceny zostały obniżone.</h2>
   <mat-card>
     <form [formGroup]="ticketForm" (ngSubmit)="onFormSubmit(ticketForm.value)" *ngIf="!buyed">
       <mat-form-field class="form-field">

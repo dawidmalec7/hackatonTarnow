@@ -17,7 +17,7 @@ export class MapComponent implements OnInit {
   startLongitude: number = 20.9869800;
   markers = [];
   parkingMarkers = [];
-  parkingDetails = {address:null};
+  parkingDetails = { address: null, numberOfPlaces: null, numberOfFreePlaces: null, numberOfFreeDisabledPlaces: null, numberOfFreeCyclesPlaces:null};
   map: any;
   detailsVisible;
   mapMenuVisible = window.innerWidth>700 ? true : false;
@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
   stepDisplay;
   nearParking;
 
-  constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient, private app: AppComponent) {
+  constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient, public app: AppComponent) {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
     this.geocoder = new google.maps.Geocoder();
     this.directionsService = new google.maps.DirectionsService();
