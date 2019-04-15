@@ -20,6 +20,7 @@ export class AppComponent {
   apiuri = 'https://localhost:5001/';
   loading = false;
   menuVisible = false;
+  logged = false;
 
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
@@ -29,6 +30,10 @@ export class AppComponent {
     this.menuVisible = false;
   }
 
+  logout() {
+    console.warn('logout');
+  }
+
 
   constructor(private router: Router) {
     router.events.subscribe((event: RouterEvent) => {
@@ -36,6 +41,7 @@ export class AppComponent {
     });
     console.info("App is running, yay!");
     console.info("%cHave a nice day, human (ಠ‿↼)", "font-weight: bold");
+    this.logged = localStorage.getItem('token') ? true : false;
   }
 
   //navigation
@@ -48,7 +54,8 @@ export class AppComponent {
     //  this.logged = true;
 
     if (event instanceof NavigationStart) {
-      this.loading = true
+      this.loading = true;
+      this.logged = localStorage.getItem('token') ? true : false;
       console.info('Loading component...');
     }
     if (event instanceof NavigationEnd) {

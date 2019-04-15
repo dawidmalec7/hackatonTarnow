@@ -19,7 +19,11 @@ namespace hackhathonTarnow.Email.EmailController
             _configuration = configuration;
         }
 
-        public async void SendEmail(string address, string title, string body, Guid id)
+        public EmailController()
+        {
+        }
+
+        public async void SendEmail(string address, string title, Guid id)
         {
             try
             {

@@ -38,6 +38,7 @@ import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
 import { SpacesComponent } from './simulation/spaces/spaces.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { TicketComponent } from './ticket/ticket.component';
         AttributionComponent,
         SimulationComponent,
         ActivationComponent,
-        SpacesComponent,
+      SpacesComponent,
+      SettingsComponent,
         TicketComponent
     ],
     imports: [

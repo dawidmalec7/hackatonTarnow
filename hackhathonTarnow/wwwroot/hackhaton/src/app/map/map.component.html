@@ -17,7 +17,7 @@
       <!--<button mat-flat-button color="primary">Wyloguj</button>-->
     </div>
       <div>
-        <button mat-flat-button color="accent" >Ustawienia TKM</button>
+        <button mat-flat-button color="accent" routerLink="/settings" *ngIf="app.logged" >Ustawienia TKM</button>
       </div>
     </div>
 </menu>

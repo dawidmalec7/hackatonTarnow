@@ -9,6 +9,56 @@ body {
 }
 
 
+.scon {
+  text-align: center;
+  width: 700px;
+
+  > h1 {
+    color: #673ab7;
+    font-size: 2.3em;
+    margin: 0.4em 0 0.6em;
+  }
+
+  > p {
+    padding: 16px;
+    line-height: 1.4em;
+    font-size: 1.2em;
+    background-image: url('./assets/pattern_light.jpg');
+    margin-bottom: 1em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    text-indent: -10%;
+
+    &.right {
+      text-align: right;
+    }
+  }
+
+  .ticketinfo {
+    p {
+      font-size: 1.6em;
+
+      span {
+        display: block;
+        margin-bottom: 0.6em;
+        font-size: 1.3em;
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .form-field {
+      max-width: 300px;
+      width: 100%;
+    }
+  }
+}
 
 //unmaterializer
 body {

@@ -44,8 +44,9 @@ namespace hackhathonTarnow.Controllers
 
                 try
                 {
-                    var email = new EmailController(_configuration);
-                    email.SendEmail(user.Email, "aktywacja konta", "test", userId);
+                    var email = new EmailController();
+                    email.SendEmail(user.Email, "aktywacja konta", userId);
+
                 }
                 catch (Exception e)
                 {

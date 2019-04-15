@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, FormGroupDirective, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
@@ -37,9 +38,9 @@ export class HomeComponent implements OnInit {
   public user = {
     Email: null, password: null
   };
-  constructor(private http: HttpClient, private router: Router) {
 
-  }
+  constructor(private http: HttpClient, private router: Router, public app: AppComponent) {}
+  
 
   public login() {
     this.http.post("https://localhost:5001/api/login", this.user).subscribe(resp => {
