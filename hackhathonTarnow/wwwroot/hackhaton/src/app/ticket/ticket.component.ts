@@ -42,9 +42,11 @@ export class TicketComponent implements OnInit {
     this.now = new Date();
     setInterval(() => {
       this.now = new Date();
+      if (this.buyed) {
       if ((this.ticket.time - this.now) < 0) {
         localStorage.removeItem('ticket');
         this.buyed = false;
+        }
       }
     }, 1000);
   }

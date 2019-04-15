@@ -52,7 +52,8 @@ import { SettingsComponent } from './settings/settings.component';
         AttributionComponent,
         SimulationComponent,
         ActivationComponent,
-        SpacesComponent,
+      SpacesComponent,
+      SettingsComponent,
         TicketComponent
     ],
     imports: [

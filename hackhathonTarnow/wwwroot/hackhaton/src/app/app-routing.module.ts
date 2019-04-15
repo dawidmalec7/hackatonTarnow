@@ -14,25 +14,26 @@ import { SettingsComponent } from './settings/settings.component';
 
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'map', component: MapComponent },
-    { path: 'registration', component: RegistrationComponent },
-    { path: 'clientPanel', component: ClientPanelComponent },
-    { path: 'attribution', component: AttributionComponent },
-    { path: 'simulation', component: SimulationComponent },
-    { path: 'activation/:id', component: ActivationComponent },
-    { path: 'ticket', component: TicketComponent },
-    { path: 'space/:id', component: SpacesComponent },
-    //{ path: 'works', redirectTo: "works/" },
-    {
-        path: '**',
-        component: PageNotFoundComponent
-    }
+  { path: '', component: HomeComponent },
+  { path: 'map', component: MapComponent },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'clientPanel', component: ClientPanelComponent },
+  { path: 'attribution', component: AttributionComponent },
+  { path: 'simulation', component: SimulationComponent },
+  { path: 'activation/:id', component: ActivationComponent },
+  { path: 'ticket', component: TicketComponent },
+  { path: 'settings', component: SettingsComponent },
+  { path: 'space/:id', component: SpacesComponent },
+  //{ path: 'works', redirectTo: "works/" },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule { }
