@@ -35,14 +35,13 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getLocation();
     this.geocoder = new google.maps.Geocoder();
-    this.getConditionalDataUsingPromise();
+    this.fetch();
   }
 
   async getLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
-      console.info(position.coords.latitude, position.coords.longitude);
+      this.findNearPlace(position.coords.latitude, position.coords.longitude);
       console.log('elo');
     });
   }
@@ -56,13 +55,14 @@ export class MapComponent implements OnInit {
     });
   }
 
-  getConditionalDataUsingPromise() {
+  fetch() {
     this.http.get("https://localhost:5001/api/parking").toPromise().then(resp => {
       (<any>resp).forEach((parking, i) => {
         this.parkings[i] = resp[i];
       })
 
       if (this.parkings.length) {
+          this.getLocation();
           this.initMap(this.findPlace);
       }
     });
@@ -74,7 +74,7 @@ export class MapComponent implements OnInit {
     this.geocoder.geocode({ 'address': address }, function (results, status) {
       if (status === 'OK') {
         let location = [results[0].geometry.location.lat(), results[0].geometry.location.lng()];
-        t.findClosestPlace(location);
+        //t.findClosestPlace(location);
         t.map.setCenter(results[0].geometry.location);
         t.map.zoom = 16;
       } else {
@@ -83,9 +83,8 @@ export class MapComponent implements OnInit {
     });
   }
 
-  findNearPlace(cords) {
-    console.log(cords);
-    this.closestDistance(this.definedPlaces, cords[0], cords[1])
+  findNearPlace(lat, lng) {
+    this.closestDistance(this.parkings, lat, lng)
   } 
 
   initMap(findPlace) {
@@ -112,7 +111,7 @@ export class MapComponent implements OnInit {
       //console.log(i);
       for (let j = 0; j < t.parkings[i].spaces.length; j++) {
         let pos = {
-          lat: t.parkings[i].spaces[j].longtitude,
+          lat: t.parkings[i].spaces[j].longitude,
           lng: t.parkings[i].spaces[j].latitude
 
         }
@@ -152,7 +151,7 @@ export class MapComponent implements OnInit {
     let distances = [];
     parkCords.forEach(function (location, i) {
       distances[i] = {
-        distance: this.calculateDistance(geo_lat, geo_lon, location.lat, location.lng),
+        distance: this.calculateDistance(geo_lat, geo_lon, parkCords[i].longitude, parkCords[i].latitude),
         city: location.title
       }
     });
