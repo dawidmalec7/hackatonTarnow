@@ -19,7 +19,10 @@ export class MapComponent implements OnInit {
   startLatitude: number = 50.0138100;
   startLongitude: number = 20.9869800;
   markers = [];
+  parkingMarkers = [];
+  parkingDetails = {address:null};
   map: any;
+  detailsVisible;
   mapMenuVisible = true;
   filtered = false;
   mapStyleName = 'day';
@@ -47,7 +50,7 @@ export class MapComponent implements OnInit {
 
   async getParking() {
     this.http.get(this.app.apiuri + "api/parking").subscribe(resp => {
-      console.log(resp); 
+      console.log(resp);
       (<any>resp).forEach((parking, i) => {
         this.parkings[i] = resp[i];
       })
@@ -61,12 +64,12 @@ export class MapComponent implements OnInit {
       })
 
       if (this.parkings.length) {
-          this.initMap(this.findPlace);
+        this.initMap();
       }
-    });
+    }).catch(e => { console.log(e), this.initMap() });
   }
 
-  findPlace() { 
+  findPlace() {
     let t = this;
     let address: HTMLInputElement = (<any>document.querySelector('#address')).value;
     this.geocoder.geocode({ 'address': address }, function (results, status) {
@@ -84,9 +87,9 @@ export class MapComponent implements OnInit {
   findClosestPlace(cords) {
     console.log(cords);
     //this.closestDistance(this.definedPlaces, cords[0], cords[1])
-  } 
+  }
 
-  initMap(findPlace) {
+  initMap() {
     var t = this;
     var mapStyle = t.mapStyleName == 'day' ? t.mapStyle.day : t.mapStyle.night;
     let icon_free = {
@@ -95,19 +98,38 @@ export class MapComponent implements OnInit {
     let icon_taken = {
       url: '../../assets/car-red-min.png', size: new google.maps.Size(25, 42)
     };
+    let icon_parking = {
+      url: '../../assets/parking.png', size: new google.maps.Size(30, 30)
+    };
 
     t.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: t.startLatitude, lng: t.startLongitude },
-      zoom: 13, mapTypeControlOptions: {
+      zoom: 13,
+      mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
         position: google.maps.ControlPosition.TOP_RIGHT
       },
+      fullscreenControl: false,
       styles: mapStyle
     });
-         console.log('dupa');
-         let counter = 0;
+    let counter = 0;
     for (let i = 0; i < t.parkings.length; i++) {
-      //console.log(i);
+      console.log(t.parkings[i]);
+      let parkingPos = {
+        lat: t.parkings[i].longtitude - 0.0002,
+        lng: t.parkings[i].latitude - 0.0002
+      }
+      t.parkingMarkers[i] = new google.maps.Marker({
+        position: parkingPos,
+        map: t.map,
+        title: 'parking',
+        icon: icon_parking
+      });
+      t.parkingMarkers[i].addListener('click', function () {
+        t.parkingDetails = t.parkings[i];
+        console.log(t.parkingDetails );
+        t.detailsVisible = true;
+      });
       for (let j = 0; j < t.parkings[i].spaces.length; j++) {
         let pos = {
           lat: t.parkings[i].spaces[j].longtitude,
@@ -132,10 +154,10 @@ export class MapComponent implements OnInit {
           });
         }
         counter++;
-        console.log(t.markers)
+        //console.log(t.markers)
       }
     }
-    var mcOptions = { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', gridSize: 60, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 4 };
+    var mcOptions = { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', gridSize: 140, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 4 };
     let visibleMarkers = t.markers;
     new MarkerClusterer(t.map, visibleMarkers, mcOptions)
 
