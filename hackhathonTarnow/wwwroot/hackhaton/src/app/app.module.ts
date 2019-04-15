@@ -32,11 +32,6 @@ import { AttributionComponent } from './attribution/attribution.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
-import { RegistrationComponent } from './registration/registration.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ClientPanelComponent } from './client-panel/client-panel.component';
-import { MapStyle } from './map-style';
-import { HttpClientModule } from '@angular/common/http';
 import { SymulationComponent } from './symulation/symulation.component';
 
 
