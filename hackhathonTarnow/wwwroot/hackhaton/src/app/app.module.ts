@@ -29,53 +29,57 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { AttributionComponent } from './attribution/attribution.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatSelectModule } from '@angular/material/select';
+
 import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
 import { SpacesComponent } from './simulation/spaces/spaces.component';
-
+import { TicketComponent } from './ticket/ticket.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    MenuComponent,
-    PageNotFoundComponent,
-    MapComponent,
-    RegistrationComponent,
-    ClientPanelComponent,
-    AttributionComponent,
-    SimulationComponent,
-    ActivationComponent,
-    SpacesComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    //material
-    MatCardModule,
-    MatButtonModule,
-    MatInputModule,
-    MatMenuModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSlideToggleModule,
-    MatProgressBarModule,
-    MatRippleModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-  ],
-  providers: [
-    DefinedPlaces,
-    MapStyle,
-    PwaService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        MenuComponent,
+        PageNotFoundComponent,
+        MapComponent,
+        RegistrationComponent,
+        ClientPanelComponent,
+        AttributionComponent,
+        SimulationComponent,
+        ActivationComponent,
+        SpacesComponent,
+        TicketComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        //material
+        MatCardModule,
+        MatButtonModule,
+        MatInputModule,
+        MatSelectModule,
+        MatMenuModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatSlideToggleModule,
+        MatProgressBarModule,
+        MatRippleModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ],
+    providers: [
+        DefinedPlaces,
+        MapStyle,
+        PwaService,
+        { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

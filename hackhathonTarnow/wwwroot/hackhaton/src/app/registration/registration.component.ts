@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, FormBuilder, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
@@ -21,7 +22,7 @@ export class RegistrationComponent implements OnInit {
 
   public onFormSubmit(form:NgForm) {
     console.log(form);
-    this.http.post("https://localhost:5001/api/register", form, { responseType: 'text' }).subscribe(resp => {
+    this.http.post(this.app.apiuri+"api/register", form, { responseType: 'text' }).subscribe(resp => {
       console.log(resp);
     });
   
@@ -36,8 +37,8 @@ export class RegistrationComponent implements OnInit {
   Email:string='';  
   Password:string='';  
   CardID: number=null;
-  
-  constructor(private fb: FormBuilder, private http: HttpClient) {   
+
+constructor(private fb: FormBuilder, private http: HttpClient, private app: AppComponent) {   
   
     // To initialize FormGroup  
    this.registerForm = this.fb.group({
