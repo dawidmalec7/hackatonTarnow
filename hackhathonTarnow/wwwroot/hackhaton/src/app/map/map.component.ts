@@ -24,6 +24,8 @@ export class MapComponent implements OnInit {
   mapStyleName = 'day';
   geocoder;
   parkings = [];
+  parkCords = [];
+
 
   constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient) {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
@@ -80,9 +82,9 @@ export class MapComponent implements OnInit {
     });
   }
 
-  findClosestPlace(cords) {
+  findNearPlace(cords) {
     console.log(cords);
-    //this.closestDistance(this.definedPlaces, cords[0], cords[1])
+    this.closestDistance(this.definedPlaces, cords[0], cords[1])
   } 
 
   initMap(findPlace) {
