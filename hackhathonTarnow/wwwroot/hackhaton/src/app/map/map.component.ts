@@ -92,11 +92,17 @@ export class MapComponent implements OnInit {
   initMap() {
     var t = this;
     var mapStyle = t.mapStyleName == 'day' ? t.mapStyle.day : t.mapStyle.night;
-    let icon_free = {
+    let icon_free_car = {
       url: '../../assets/car-green-min.png', size: new google.maps.Size(25, 42)
     };
-    let icon_taken = {
+    let icon_taken_car = {
       url: '../../assets/car-red-min.png', size: new google.maps.Size(25, 42)
+    };
+    let icon_free_disabled = {
+      url: '../../assets/disabled-red-min.png', size: new google.maps.Size(25, 42)
+    };
+    let icon_taken_disabled = {
+      url: '../../assets/disabled-red-min.png', size: new google.maps.Size(25, 42)
     };
     let icon_parking = {
       url: '../../assets/parking.png', size: new google.maps.Size(30, 30)
@@ -136,21 +142,21 @@ export class MapComponent implements OnInit {
           lng: t.parkings[i].spaces[j].latitude
 
         }
-        console.log(pos);
+        console.log(t.parkings[i].spaces[j].spaceType);
 
         if (t.parkings[i].spaces[j].isBusy) {
           t.markers[counter] = new google.maps.Marker({
             position: pos,
             map: t.map,
             title: 'zajete',
-            icon: icon_taken
+            icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType+'-red-min.png', size: new google.maps.Size(25, 42) }
           });
         } else {
           t.markers[counter] = new google.maps.Marker({
             position: pos,
             map: t.map,
             title: 'wolne',
-            icon: icon_free
+            icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType+'-green-min.png', size: new google.maps.Size(25, 42)}
           });
         }
         counter++;
