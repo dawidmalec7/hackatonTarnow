@@ -26,25 +26,50 @@ export class MapComponent implements OnInit {
   geocoder;
   parkings = [];
   parkCords = [];
-
+  directionsDisplay;
+  directionsService;
+  stepDisplay;
+  nearParking;
 
   constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient, private app: AppComponent) {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
-    console.log(this.mapStyleName);
-    this.getParking();
+    this.geocoder = new google.maps.Geocoder();
+    this.directionsService = new google.maps.DirectionsService();
   }
 
   ngOnInit() {
-    this.geocoder = new google.maps.Geocoder();
     this.fetch();
   }
 
-  async getLocation() {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      this.findNearPlace(position.coords.latitude, position.coords.longitude);
-      console.log('elo');
+  getLocation(geocoder) {
+    var t = this;
+    navigator.geolocation.getCurrentPosition( (position) => {
+      this.nearParking = this.findNearPlace(position.coords.latitude, position.coords.longitude);
+      debugger
+      this.calcRoute(position.coords.latitude, position.coords.longitude, this.nearParking.lat, this.nearParking.lng);
+      console.log()
     });
   }
+
+  calcRoute(start_lat, start_lng, end_lat, end_lng) {
+  var request = {
+      origin: start_lat + ',' + start_lng,
+      destination: end_lat + ',' + end_lng,
+      travelMode: 'DRIVING'
+  };
+  var t = this;
+  var rendererOptions = {
+      map: this.map
+  }
+  this.directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions)
+  
+  this.directionsService.route(request, function(response, status) {
+    if (status == "OK") {
+      t.directionsDisplay.setDirections(response);
+    }
+    debugger
+  });
+}
 
   async getParking() {
     this.http.get(this.app.apiuri + "api/parking").subscribe(resp => {
@@ -62,7 +87,6 @@ export class MapComponent implements OnInit {
       })
 
       if (this.parkings.length) {
-          this.getLocation();
           this.initMap(this.findPlace);
       }
     });
@@ -84,8 +108,10 @@ export class MapComponent implements OnInit {
   }
 
   findNearPlace(lat, lng) {
-    this.closestDistance(this.parkings, lat, lng)
-  } 
+      this.getLocation(this.geocoder);
+      return this.closestDistance(this.parkings, lat, lng)
+  }
+ 
 
   initMap(findPlace) {
     var t = this;
@@ -105,17 +131,15 @@ export class MapComponent implements OnInit {
       },
       styles: mapStyle
     });
-         console.log('dupa');
          let counter = 0;
     for (let i = 0; i < t.parkings.length; i++) {
       //console.log(i);
       for (let j = 0; j < t.parkings[i].spaces.length; j++) {
         let pos = {
-          lat: t.parkings[i].spaces[j].longitude,
+          lat: t.parkings[i].spaces[j].longtitude,
           lng: t.parkings[i].spaces[j].latitude
 
         }
-        console.log(pos);
 
         if (t.parkings[i].spaces[j].isBusy) {
           t.markers[counter] = new google.maps.Marker({
@@ -133,7 +157,6 @@ export class MapComponent implements OnInit {
           });
         }
         counter++;
-        console.log(t.markers)
       }
     }
     var mcOptions = { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', gridSize: 60, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 4 };
@@ -147,15 +170,18 @@ export class MapComponent implements OnInit {
   }
 
 
-  closestDistance(parkCords, geo_lat, geo_lon) {
-    let distances = [];
-    parkCords.forEach(function (location, i) {
-      distances[i] = {
-        distance: this.calculateDistance(geo_lat, geo_lon, parkCords[i].longitude, parkCords[i].latitude),
-        city: location.title
-      }
+  closestDistance(parkings, geo_lat, geo_lon) {
+    let calculateParkings = [];
+    parkings.forEach((parking, i) => {
+        let distance = this.calculateDistance(geo_lat, geo_lon, parking.longtitude, parking.latitude) 
+        calculateParkings[i] = {
+          parking: parking.address,
+          distance: distance,
+          lat: parking.longtitude,
+          lng: parking.latitude
+        }
     });
-    let closestLoc = distances.reduce((prev, current) => (prev.distance < current.distance) ? prev : current);
+    let closestLoc = calculateParkings.reduce((prev, current) => (prev.distance < current.distance) ? prev : current);
 
     return closestLoc;
   }
