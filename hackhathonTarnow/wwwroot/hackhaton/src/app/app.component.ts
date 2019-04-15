@@ -17,6 +17,7 @@ import {
 })
 export class AppComponent {
   title = 'hackhaton';
+  apiuri = 'https://localhost:5001/';
   loading = false;
   menuVisible = false;
 

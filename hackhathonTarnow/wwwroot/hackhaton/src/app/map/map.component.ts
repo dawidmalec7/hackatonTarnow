@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DefinedPlaces } from '../defined-places';
 import { MapStyle } from '../map-style';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 //import * as MarkerClusterer from "@google/markerclusterer"
 
 
@@ -25,7 +26,7 @@ export class MapComponent implements OnInit {
   geocoder;
   parkings = [];
 
-  constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient) {
+  constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient, private app: AppComponent) {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
     console.log(this.mapStyleName);
   }
@@ -43,8 +44,8 @@ export class MapComponent implements OnInit {
     });
   }
 
-  async getParking(){
-    this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
+  async getParking() {
+    this.http.get(this.app.apiuri + "api/parking").subscribe(resp => {
       console.log(resp); 
       (<any>resp).forEach((parking, i) => {
         this.parkings[i] = resp[i];
