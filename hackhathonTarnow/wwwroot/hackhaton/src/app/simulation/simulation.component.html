@@ -1,5 +1,5 @@
 <section class="container">
-  <div class="box" *ngFor="let parking of parkings; index as i">
+  <div class="box" *ngFor="let parking of parkings; index as i" (click)="chooseParking(parking.id)">
     <ul>
       <li>Adres: {{parking.address}}</li>
       <li>Liczba miejsc: {{parking.numberOfPlaces}}</li>

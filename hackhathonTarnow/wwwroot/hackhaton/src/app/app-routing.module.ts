@@ -8,6 +8,7 @@ import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { AttributionComponent } from './attribution/attribution.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
+import { SpacesComponent } from './simulation/spaces/spaces.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'attribution', component: AttributionComponent },
   { path: 'simulation', component: SimulationComponent },
   { path: 'activation/:id', component: ActivationComponent },
+  { path: 'space/:id', component: SpacesComponent },
   //{ path: 'works', redirectTo: "works/" },
   {
     path: '**',

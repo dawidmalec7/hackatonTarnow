@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-symulation',
@@ -10,7 +11,8 @@ export class SimulationComponent implements OnInit {
 
   public parkings;
   public spaces;
-  constructor(private http: HttpClient) { 
+  public isSpace;
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -18,17 +20,14 @@ export class SimulationComponent implements OnInit {
     this.getParking();
   }
 
-  updatePlace(id:string) {
-    this.http.put("https://localhost:5001/api/parking/" + id, {}, {responseType: 'text'}).subscribe(resp => {
-      console.log(resp);
-      this.getParking();
-    });
+  public chooseParking(id) {
+    this.router.navigateByUrl("space/" + id);
   }
 
-  getParking(){
+  getParking() {
     this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
       console.log(resp);
-      this.parkings = resp; 
+      this.parkings = resp;
     });
   }
 }

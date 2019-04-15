@@ -34,6 +34,7 @@ import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
+import { SpacesComponent } from './simulation/spaces/spaces.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ActivationComponent } from './activation/activation.component';
     ClientPanelComponent,
     AttributionComponent,
     SimulationComponent,
-    ActivationComponent
+    ActivationComponent,
+    SpacesComponent
   ],
   imports: [
     BrowserModule,
