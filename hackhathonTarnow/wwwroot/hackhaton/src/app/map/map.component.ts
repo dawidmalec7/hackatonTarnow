@@ -3,7 +3,7 @@ import { DefinedPlaces } from '../defined-places';
 import { MapStyle } from '../map-style';
 import { HttpClient } from '@angular/common/http';
 import { AppComponent } from '../app.component';
-//import * as MarkerClusterer from "@google/markerclusterer"
+import * as MarkerClusterer from "@google/markerclusterer"
 
 
 declare var google;
@@ -66,7 +66,7 @@ export class MapComponent implements OnInit {
     });
   }
 
-  findPlace() {
+  findPlace() { 
     let t = this;
     let address: HTMLInputElement = (<any>document.querySelector('#address')).value;
     this.geocoder.geocode({ 'address': address }, function (results, status) {
@@ -135,9 +135,9 @@ export class MapComponent implements OnInit {
         console.log(t.markers)
       }
     }
-    var mcOptions = { gridSize: 60, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 2 };
+    var mcOptions = { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', gridSize: 60, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 4 };
     let visibleMarkers = t.markers;
-    new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' }, mcOptions)
+    new MarkerClusterer(t.map, visibleMarkers, mcOptions)
 
 
     //  document.getElementById('findPlace').addEventListener('click', function() {
