@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
   filtered = false;
   mapStyleName = 'day';
   geocoder;
-  parkings;
+  parkings = [];
 
   constructor(private definedPlaces: DefinedPlaces, private mapStyle: MapStyle, private http: HttpClient) {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
