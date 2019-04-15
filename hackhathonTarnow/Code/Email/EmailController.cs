@@ -12,15 +12,11 @@ namespace hackhathonTarnow.Email.EmailController
     public class EmailController
     {
         private IConfiguration _configuration { get; set; }
- 
+
 
         public EmailController(IConfiguration configuration)
         {
             _configuration = configuration;
-        }
-
-        public EmailController()
-        {
         }
 
         public async void SendEmail(string address, string title, string body, Guid id)
@@ -33,9 +29,9 @@ namespace hackhathonTarnow.Email.EmailController
                     Port = 587,
                     EnableSsl = true,
                     UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(_configuration["Email"], _configuration["Password "])
+                    Credentials = new NetworkCredential(_configuration["Email"], _configuration["Password"])
                 };
-                using (var message = new MailMessage(_configuration["EmailLogin"], address)
+                using (var message = new MailMessage(_configuration["Email"], address)
                 {
                     Subject = title,
                     Body = "http://localhost:4200/api/activation/" + id,

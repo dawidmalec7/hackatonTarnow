@@ -83,7 +83,7 @@ namespace hackhathonTarnow
             }
 
             app.UseDefaultFiles();
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
