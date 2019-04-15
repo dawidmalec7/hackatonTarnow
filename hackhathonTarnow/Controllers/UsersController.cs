@@ -27,18 +27,20 @@ namespace hackhathonTarnow.Controllers
 
 
         [HttpPut]
-        [Authorize(Roles = "user")]
+        [Authorize]
         public async Task<ActionResult<HttpResponseMessage>> EditData([FromBody] User users)
         {
             try
             {
                 var crypt = new CryptPassword();
-                User userDb = await _context.Users.Where(u => u.Id == users.Id).FirstOrDefaultAsync();
+                Guid userId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                User userDb = await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
                 userDb.Name = users.Name;
                 userDb.Surname = users.Surname;
                 userDb.Password = crypt.EncodeText(users.Password);
                 userDb.PhoneNumber = users.PhoneNumber;
                 userDb.UpdatedDate = DateTime.Now;
+                userDb.DefaultPlate = users.DefaultPlate;
 
                 _context.Users.Update(userDb);
                 await _context.SaveChangesAsync();
@@ -57,7 +59,7 @@ namespace hackhathonTarnow.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "user")]
+        [Authorize]
         public async Task<ActionResult<HttpResponseMessage>> DeleteUser()
         {
             Guid userId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
