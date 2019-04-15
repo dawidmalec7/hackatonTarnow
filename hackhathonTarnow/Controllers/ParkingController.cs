@@ -41,10 +41,9 @@ namespace hackhathonTarnow.Controllers
             return Ok("Dodano Parking");
         }
         [HttpGet]
-        [Authorize(Roles = "admin")]
         public async Task<IEnumerable<Parking>> GetParking()
         {
-            var parking = await _context.Parkings.ToListAsync();
+            var parking = await _context.Parkings.Include(p => p.Spaces).ToListAsync();
             return parking;
         }
 
