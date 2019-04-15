@@ -29,6 +29,7 @@ export class TicketComponent implements OnInit {
   now;
   ticketForm: FormGroup;
   Plate: string = '';
+  user = {};
   Price: number = 0;
   constructor(private fb: FormBuilder, private http: HttpClient) {
     //ifpremium
@@ -62,7 +63,7 @@ export class TicketComponent implements OnInit {
     localStorage.setItem('ticket', JSON.stringify(this.ticket));
   }
   ngOnInit() {
-    this.http.get("https://localhost:5001/api/users").subscribe(resp => console.log(resp))
+    this.http.get("https://localhost:5001/api/users").subscribe(resp => this.user = resp)
   }
-  
+
 }
