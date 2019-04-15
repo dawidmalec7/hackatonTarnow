@@ -36,6 +36,7 @@ namespace hackhathonTarnow.Controllers
             {
                 User dbUser = await _context.Users.Where(u => u.Email == user.Email).FirstOrDefaultAsync();
                 if (dbUser == null) return Conflict("Użytkownik o takim adresie email nie istnieje");
+                if (!dbUser.IsActivated) return Conflict("Konto nie zostało aktywowane");
                 var crypt = new CryptPassword();
                 if (dbUser.Password != crypt.EncodeText(user.Password)) return Conflict("Niepoprawne hasło, spróbuj ponownie");
 

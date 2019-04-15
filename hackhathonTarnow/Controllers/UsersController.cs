@@ -65,5 +65,7 @@ namespace hackhathonTarnow.Controllers
             _context.Users.Remove(user);
             return Ok("Użytkownik został usunięty");
         }
+
+        
     }
 }

@@ -10,11 +10,18 @@ import { HttpClient } from '@angular/common/http';
 export class ActivationComponent implements OnInit {
 
   isActivated: boolean = false;
+  public info: string = "";
   constructor(private ac: ActivatedRoute, private http: HttpClient) {
     var userId: string = this.ac.snapshot.params.id;
 
-    this.http.put("", {}, { responseType: "text" }).subscribe(resp => this.isActivated = true,
-    err => this.isActivated = false);
+
+    this.http.put("https://localhost:5001/api/activation/" + userId, {}, { responseType: "text" }).subscribe(resp => {
+      this.isActivated = true;
+      this.info = resp;
+    }, err => {
+      this.isActivated = false;
+      this.info = err;
+    });
   }
 
   ngOnInit() {

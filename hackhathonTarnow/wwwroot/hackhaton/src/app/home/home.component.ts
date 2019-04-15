@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
       console.log(resp);
       localStorage.setItem("token", (<any>resp).value.token);
       localStorage.setItem("tokenExpires", (<any>resp).value.tokenExpires);
-      this.router.navigateByUrl("map")
+      this.router.navigateByUrl("map");
     });
   }
 

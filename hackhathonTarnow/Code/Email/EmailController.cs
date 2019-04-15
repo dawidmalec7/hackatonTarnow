@@ -34,7 +34,9 @@ namespace hackhathonTarnow.Email.EmailController
                 using (var message = new MailMessage(_configuration["Email"], address)
                 {
                     Subject = title,
-                    Body = "http://localhost:4200/api/activation/" + id,
+                    Body = "" +
+                    "<h1>Witaj</h1>" +
+                    "<p>Aby aktywować konto kliknij w link <a href='http://localhost:4200/activation/" + id + "'>Link</a></p>",
                     IsBodyHtml = true
                 })
                 {
