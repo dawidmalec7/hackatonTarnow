@@ -37,9 +37,11 @@ namespace hackhathonTarnow.Controllers
                 user.Role = "user";
                 user.Password = crypt.EncodeText(user.Password);
                 user.CreatedDate = DateTime.Now;
+                user.ActivationDate = DateTime.Now.AddMinutes(60);
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
                 var userId = await _context.Users.Where(u => u.Email == user.Email).Select(e => e.Id).FirstOrDefaultAsync();
+
                 try
                 {
                     var email = new EmailController(_configuration);
@@ -49,7 +51,7 @@ namespace hackhathonTarnow.Controllers
                 {
                     Console.WriteLine(e);
                 }
-                return Ok("Rejestracja przebiegła pomyślnie");
+                return Ok("Rejestracja przebiegła pomyślnie, na email wysłano potwierdzenie rejestracji");
             }
             catch (Exception e)
             {

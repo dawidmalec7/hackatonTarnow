@@ -7,6 +7,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { AttributionComponent } from './attribution/attribution.component';
 import { SymulationComponent } from './symulation/symulation.component';
+import { ActivationComponent } from './activation/activation.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'clientPanel', component: ClientPanelComponent },
   { path: 'attribution', component: AttributionComponent },
   { path: 'simulation', component: SymulationComponent },
+  { path: 'activation/:id', component: ActivationComponent },
   //{ path: 'works', redirectTo: "works/" },
   {
     path: '**',

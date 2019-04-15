@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup,FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, FormGroup, FormBuilder, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
@@ -32,17 +33,20 @@ export class HomeComponent implements OnInit {
   ]);
 
   matcher = new MyErrorStateMatcher();
-  
+
   public user = {
     Email: null, password: null
   };
-  constructor(private http: HttpClient) {
-      
+  constructor(private http: HttpClient, private router: Router) {
+
   }
 
   public login() {
-    this.http.post("https://localhost:5001/api/login", this.user, {responseType: "text"}).subscribe(resp => {
+    this.http.post("https://localhost:5001/api/login", this.user).subscribe(resp => {
       console.log(resp);
+      localStorage.setItem("token", (<any>resp).value.token);
+      localStorage.setItem("tokenExpires", (<any>resp).value.tokenExpires);
+      this.router.navigateByUrl("map")
     });
   }
 

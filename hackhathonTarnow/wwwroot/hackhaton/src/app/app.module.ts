@@ -33,6 +33,7 @@ import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { SymulationComponent } from './symulation/symulation.component';
+import { ActivationComponent } from './activation/activation.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SymulationComponent } from './symulation/symulation.component';
     RegistrationComponent,
     ClientPanelComponent,
     AttributionComponent,
-    SymulationComponent
+    SymulationComponent,
+    ActivationComponent
   ],
   imports: [
     BrowserModule,
