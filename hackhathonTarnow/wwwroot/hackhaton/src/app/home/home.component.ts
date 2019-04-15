@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup,FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
   public user = {
     Email: null, password: null
   };
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public app: AppComponent) {
       
   }
 

@@ -50,7 +50,8 @@
               </mat-form-field>
             </form>
              <mat-card-actions>
-              <a mat-flat-button (click)="login()" color="accent">Zaloguj</a>
+              <a mat-flat-button (click)="login()" color="accent" *ngIf="!app.logged">Zaloguj</a>
+              <a mat-flat-button (click)="app.logout()" color="accent" *ngIf="app.logged">Wyloguj</a>
               <a mat-flat-button routerLink="registration" color="primary">Rejestracja</a>
               <a mat-flat-button routerLink="map" color="primary">Mapa</a>
             </mat-card-actions>

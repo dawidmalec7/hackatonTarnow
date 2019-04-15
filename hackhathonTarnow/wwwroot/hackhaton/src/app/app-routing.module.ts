@@ -8,6 +8,7 @@ import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { AttributionComponent } from './attribution/attribution.component';
 import { SymulationComponent } from './symulation/symulation.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'clientPanel', component: ClientPanelComponent },
   { path: 'attribution', component: AttributionComponent },
   { path: 'ticket', component: TicketComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'simulation', component: SymulationComponent },
   //{ path: 'works', redirectTo: "works/" },
   {

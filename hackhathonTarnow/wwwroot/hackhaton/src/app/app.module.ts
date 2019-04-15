@@ -36,6 +36,7 @@ import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { SymulationComponent } from './symulation/symulation.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { TicketComponent } from './ticket/ticket.component';
     ClientPanelComponent,
     AttributionComponent,
     SymulationComponent,
-    TicketComponent
+    TicketComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

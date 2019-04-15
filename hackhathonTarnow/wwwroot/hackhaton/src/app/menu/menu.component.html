@@ -12,11 +12,12 @@
     <div class="menu-list">
       <button mat-button routerLink="">Home</button>
       <button mat-button color="accent" routerLink="map">Mapa</button>
-      <button mat-button color="accent" routerLink="ticket">MoBILET</button>
+      <button mat-button color="accent" routerLink="ticket" *ngIf="app.logged">MoBILET</button>
       <!--<button mat-button *ngIf="Pwa.promptEvent" (click)="installPwa()">
-        Zainstaluj jako aplikację
-      </button>-->
-      <button mat-button color="accent">Ustawienia</button>
+    Zainstaluj jako aplikację
+  </button>-->
+      <button mat-flat-button (click)="app.logout()" color="accent" *ngIf="app.logged">Wyloguj</button>
+      <button mat-button color="accent" routerLink="settings" *ngIf="app.logged">Ustawienia</button>
     </div>
     <div class="att">
 
