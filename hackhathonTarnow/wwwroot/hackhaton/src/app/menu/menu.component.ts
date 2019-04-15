@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
-import { PwaService } from '../pwa-service.service';
+//import { PwaService } from '../pwa-service.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +9,7 @@ import { PwaService } from '../pwa-service.service';
 })
 export class MenuComponent implements OnInit {
   promptEvent;
-  constructor(public app: AppComponent, public Pwa: PwaService) { }
+  constructor(public app: AppComponent, /*public Pwa: PwaService*/) { }
 
   installPwa(): void {
     //this.Pwa.promptEvent.prompt();

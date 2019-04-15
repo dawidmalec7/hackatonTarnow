@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { numberOfPlaces } from '../models/NumberOfPlaces';
+
 @Component({
   selector: 'app-symulation',
   templateUrl: './symulation.component.html',
@@ -14,7 +16,7 @@ export class SymulationComponent implements OnInit {
   }
 
   updatePlace(id:string) {
-    this.http.put("https://localhost:5001/api/parking/" + id, {}).subscribe(resp => {
+    this.http.put("https://localhost:5001/api/parking/" + id, {}, {responseType: 'text'}).subscribe(resp => {
       console.log(resp);
       this.getParking();
     });
@@ -25,6 +27,7 @@ export class SymulationComponent implements OnInit {
       this.spaces = resp[0].spaces;
     });
   }
+
   ngOnInit() {
   }
 

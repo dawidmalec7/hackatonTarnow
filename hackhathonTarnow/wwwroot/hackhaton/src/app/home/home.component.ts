@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup,FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
-import { signalRService } from '../services/signal-r.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
@@ -23,7 +22,6 @@ export class HomeComponent implements OnInit {
     'Po zaparkowaniu <b>kupujesz bilet</b> parkingowy'
   ];
 
-  private signalRService: signalRService = new signalRService();
 
   emailFormControl = new FormControl('', [
     Validators.required,

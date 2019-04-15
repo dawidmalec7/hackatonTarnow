@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DefinedPlaces } from './defined-places';
@@ -32,6 +31,7 @@ import { AttributionComponent } from './attribution/attribution.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PwaService } from './pwa-service.service';
+import { RegistrationComponent } from './registration/registration.component';
 import { SymulationComponent } from './symulation/symulation.component';
 
 
