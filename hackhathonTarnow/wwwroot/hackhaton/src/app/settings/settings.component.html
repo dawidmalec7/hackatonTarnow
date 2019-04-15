@@ -1,0 +1,60 @@
+<div class="scon">
+  <h1>Ustawienia</h1>
+  <p>Tutaj możesz zmienić swoje dane oraz ustawienia</p>
+  <mat-card>
+    <mat-card-content>
+      <form class="registration-form container" [formGroup]="userForm" (ngSubmit)="onFormSubmit(userForm.value)">
+        <div class="form-fields">
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="form-field">
+                <input matInput required placeholder="Imie" formControlName="Name">
+                <mat-error *ngIf="!userForm.get('Name').valid && userForm.get('Name').touched">
+                  Imie jest <strong>wymagane</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput required formControlName="Surname" placeholder="Nazwisko">
+                <mat-error *ngIf="!userForm.get('Surname').valid && userForm.get('Surname').touched">
+                  Nazwisko jest <strong>wymagane</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput required placeholder="Telefon" formControlName="Phone">
+                <!--  <mat-error *ngIf="!registerForm.get('Phone').valid && registerForm.get('Phone').touched">
+               Wprowadz poprawny number telefonu.
+             </mat-error>  -->
+                <mat-error *ngIf="!userForm.get('Phone').valid && userForm.get('Phone').touched">
+                  Telefon jest <strong>wymagany</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="form-field">
+
+                <input matInput required placeholder="Email" formControlName="Email" [disabled]="true">
+                <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Wprowadz poprawny adres email.
+              </mat-error>
+            -->
+                <mat-error *ngIf="!userForm.get('Email').valid && userForm.get('Email').touched">
+                  Email jest <strong>wymagany</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput required type="password" formControlName="Password" placeholder="Hasło">
+                <mat-error *ngIf="!userForm.get('Password').valid && userForm.get('Password').touched">
+                  Hasło jest <strong>wymagane</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput name="CardID" placeholder="ID karty miejskiej">
+              </mat-form-field>
+            </div>
+          </div>
+          <button mat-flat-button type="submit" color="primary">Zaaktualizuj dane</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

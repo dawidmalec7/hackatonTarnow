@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
   parkingDetails = {address:null};
   map: any;
   detailsVisible;
-  mapMenuVisible = true;
+  mapMenuVisible = window.innerWidth>700 ? true : false;
   filtered = false;
   mapStyleName = 'day';
   geocoder;

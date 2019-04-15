@@ -10,6 +10,7 @@ import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
 import { SpacesComponent } from './simulation/spaces/spaces.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const routes: Routes = [
