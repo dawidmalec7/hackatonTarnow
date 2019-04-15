@@ -46,7 +46,7 @@ export class MapComponent implements OnInit {
   async getParking(){
     this.http.get("https://localhost:5001/api/parking").subscribe(resp => {
       console.log(resp); 
-      resp.forEach((parking, i) => {
+      (<any>resp).forEach((parking, i) => {
         this.parkings[i] = resp[i];
       })
     });
