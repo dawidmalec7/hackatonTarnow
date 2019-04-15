@@ -36,6 +36,7 @@ export class MapComponent implements OnInit {
     this.mapStyleName = localStorage.getItem('mapstyle') || 'day';
     this.geocoder = new google.maps.Geocoder();
     this.directionsService = new google.maps.DirectionsService();
+
     this.refreshTimeOut(15000);
   }
 
@@ -46,11 +47,18 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refresh();
-  }
-  refresh(){
     this.fetch();
   }
+  refresh() {
+    this.parkings = [];
+    this.markers = [];
+    this.http.get("https://localhost:5001/api/parking").toPromise().then(resp => {
+      (<any>resp).forEach((parking, i) => {
+        this.parkings[i] = resp[i];
+        this.setMarkers();
+      })
+      console.log('eeee');
+    }).catch(e => { console.log('error',  e), this.initMap() });  }
   getLocation() {
     var t = this;
     let address = (<any>document.querySelector('#address')).value;
@@ -129,38 +137,13 @@ export class MapComponent implements OnInit {
   findNearPlace(lat, lng){
       return this.closestDistance(this.parkings, lat, lng)
   }
- 
-  initMap() {
-    var t = this;
-    var mapStyle = t.mapStyleName == 'day' ? t.mapStyle.day : t.mapStyle.night;
-    let icon_free_car = {
-      url: '../../assets/car-green-min.png', size: new google.maps.Size(25, 42)
-    };
-    let icon_taken_car = {
-      url: '../../assets/car-red-min.png', size: new google.maps.Size(25, 42)
-    };
-    let icon_free_disabled = {
-      url: '../../assets/disabled-red-min.png', size: new google.maps.Size(25, 42)
-    };
-    let icon_taken_disabled = {
-      url: '../../assets/disabled-red-min.png', size: new google.maps.Size(25, 42)
-    };
+
+  setMarkers() {
+    let counter = 0;
     let icon_parking = {
       url: '../../assets/parking.png', size: new google.maps.Size(30, 30)
     };
-
-    t.map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: t.startLatitude, lng: t.startLongitude },
-      zoom: 13,
-      mapTypeControlOptions: {
-        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-        position: google.maps.ControlPosition.TOP_RIGHT
-      },
-      fullscreenControl: false,
-      styles: mapStyle
-    });
-
-    let counter = 0;
+    var t = this;
     for (let i = 0; i < t.parkings.length; i++) {
       let parkingPos = {
         lat: t.parkings[i].longtitude - 0.0002,
@@ -183,14 +166,14 @@ export class MapComponent implements OnInit {
           lng: t.parkings[i].spaces[j].latitude
 
         }
-        
+
         if (t.parkings[i].spaces[j].isBusy) {
           t.markers[counter] = new google.maps.Marker({
             position: pos,
             map: t.map,
             title: 'zajete',
             type: t.parkings[i].spaces[j].spaceType,
-            icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType+'-red-min.png', size: new google.maps.Size(25, 42) }
+            icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType + '-red-min.png', size: new google.maps.Size(25, 42) }
           });
         } else {
           t.markers[counter] = new google.maps.Marker({
@@ -198,7 +181,7 @@ export class MapComponent implements OnInit {
             map: t.map,
             title: 'wolne',
             type: t.parkings[i].spaces[j].spaceType,
-            icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType+'-green-min.png', size: new google.maps.Size(25, 42)}
+            icon: { url: '../../assets/' + t.parkings[i].spaces[j].spaceType + '-green-min.png', size: new google.maps.Size(25, 42) }
           });
         }
         counter++;
@@ -207,6 +190,25 @@ export class MapComponent implements OnInit {
     var mcOptions = { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', gridSize: 140, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 4 };
     let visibleMarkers = t.markers;
     new MarkerClusterer(t.map, visibleMarkers, mcOptions)
+  }
+ 
+  initMap() {
+    var t = this;
+    var mapStyle = t.mapStyleName == 'day' ? t.mapStyle.day : t.mapStyle.night;
+
+    t.map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: t.startLatitude, lng: t.startLongitude },
+      zoom: 13,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        position: google.maps.ControlPosition.TOP_RIGHT
+      },
+      fullscreenControl: false,
+      styles: mapStyle
+    });
+
+    let counter = 0;
+    this.setMarkers();
 
 
     //  document.getElementById('findPlace').addEventListener('click', function() {
