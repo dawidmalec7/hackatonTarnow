@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DefinedPlaces } from '../defined-places';
 import { MapStyle } from '../map-style';
-import * as MarkerClusterer from "@google/markerclusterer"
+//import * as MarkerClusterer from "@google/markerclusterer"
 
 
 declare var google;
@@ -112,7 +112,7 @@ export class MapComponent implements OnInit {
     }
     var mcOptions = { gridSize: 60, maxZoom: 16, zoomOnClick: true, minimumClusterSize: 2 };
     let visibleMarkers = t.markers;
-    new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' }, mcOptions)
+    //new MarkerClusterer(t.map, visibleMarkers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' }, mcOptions)
 
 
     //  document.getElementById('findPlace').addEventListener('click', function() {

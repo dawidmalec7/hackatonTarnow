@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DefinedPlaces } from './defined-places';
@@ -29,14 +28,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { AttributionComponent } from './attribution/attribution.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+//import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { PwaService } from './pwa-service.service';
+//import { PwaService } from './pwa-service.service';
 import { RegistrationComponent } from './registration/registration.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ClientPanelComponent } from './client-panel/client-panel.component';
-import { MapStyle } from './map-style';
-import { HttpClientModule } from '@angular/common/http';
 import { SymulationComponent } from './symulation/symulation.component';
 
 
@@ -69,12 +64,12 @@ import { SymulationComponent } from './symulation/symulation.component';
     MatSlideToggleModule,
     MatProgressBarModule,
     MatRippleModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    //ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     DefinedPlaces,
     MapStyle,
-    PwaService,
+    //PwaService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]

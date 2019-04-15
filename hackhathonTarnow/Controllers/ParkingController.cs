@@ -28,7 +28,7 @@ namespace hackhathonTarnow.Controllers
         public async Task<ActionResult<HttpResponseMessage>> ParkingCreate([FromBody] Parking parking)
         {
             parking.Spaces = new List<Space>();
-            for(int i = 0; i<parking.NumberOfPlaces; i++)
+            for (int i = 0; i < parking.NumberOfPlaces; i++)
             {
                 parking.Spaces.Add(new Space
                 {
@@ -36,15 +36,16 @@ namespace hackhathonTarnow.Controllers
                 });
             }
             _context.Parkings.Add(parking);
-     
+
             await _context.SaveChangesAsync();
             return Ok("Dodano Parking");
         }
+
         [HttpGet]
-        [Authorize(Roles = "admin")]
+        [Authorize]
         public async Task<IEnumerable<Parking>> GetParking()
         {
-            var parking = await _context.Parkings.ToListAsync();
+            var parking = await _context.Parkings.Include(p => p.Spaces).ToListAsync();
             return parking;
         }
 
@@ -56,7 +57,7 @@ namespace hackhathonTarnow.Controllers
             return Ok(parking);
         }
 
-        [HttpPost] 
+        [HttpPost]
         [Route("{id}")]
         public async Task<ActionResult<HttpResponseMessage>> BuyPlace([FromRoute] Guid id, [FromBody] ParkingHistory parkingHistory)
         {
@@ -73,5 +74,20 @@ namespace hackhathonTarnow.Controllers
             return Ok("Wykupiono miejsce parkingowe");
         }
 
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<ActionResult<HttpResponseMessage>> UpdatePlace([FromRoute] Guid id)
+        {
+            var space = await _context.Spaces.Where(s => s.Id == id).FirstOrDefaultAsync();
+            space.IsBusy = !space.IsBusy;
+
+            _context.Spaces.Update(space);
+            await _context.SaveChangesAsync();
+            return Ok("Miejsce zaktualizowane");
+        }
+
+
     }
 }
+
