@@ -9,6 +9,7 @@ import { AttributionComponent } from './attribution/attribution.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { ActivationComponent } from './activation/activation.component';
 import { SpacesComponent } from './simulation/spaces/spaces.component';
+import { TicketComponent } from './ticket/ticket.component';
 
 
 const routes: Routes = [

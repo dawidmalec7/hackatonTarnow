@@ -38,14 +38,6 @@ export class AppComponent {
     console.info("%cHave a nice day, human (ಠ‿↼)", "font-weight: bold");
   }
 
- 
-
-  //private registerOnServerEvents(): void {
-  //  this._hubConnection.on('ReceiveMessage', (data: any) => {
-  //    this.messageReceived.emit(data);
-  //  });
-  //}
-
   //navigation
   navigationInterceptor(event: RouterEvent): void {
     //this.token = localStorage.getItem("token");
