@@ -1,13 +1,28 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace hackhathonTarnow.Migrations
 {
-    public partial class init : Migration
+    public partial class testClearmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ParkingHistories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    ParkingId = table.Column<Guid>(nullable: false),
+                    HowLong = table.Column<int>(nullable: false),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParkingHistories", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Parkings",
                 columns: table => new
@@ -39,8 +54,12 @@ namespace hackhathonTarnow.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     CardId = table.Column<string>(nullable: true),
                     Role = table.Column<string>(nullable: true),
+                    IsActivated = table.Column<bool>(nullable: false),
+                    DefaultPlate = table.Column<string>(nullable: true),
+                    IsPremium = table.Column<bool>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    UpdatedDate = table.Column<DateTime>(nullable: true)
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
+                    ActivationDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,15 +70,13 @@ namespace hackhathonTarnow.Migrations
                 name: "Spaces",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     IsBusy = table.Column<bool>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: true),
-                    EndTime = table.Column<DateTime>(nullable: true),
                     Plate = table.Column<string>(nullable: true),
-                    ParkingId = table.Column<Guid>(nullable: true),
+                    ParkingId = table.Column<Guid>(nullable: false),
                     Longtitude = table.Column<float>(nullable: false),
-                    Latitude = table.Column<float>(nullable: false)
+                    Latitude = table.Column<float>(nullable: false),
+                    SpaceType = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,7 +86,7 @@ namespace hackhathonTarnow.Migrations
                         column: x => x.ParkingId,
                         principalTable: "Parkings",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,6 +134,9 @@ namespace hackhathonTarnow.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ParkingHistories");
+
             migrationBuilder.DropTable(
                 name: "Spaces");
 

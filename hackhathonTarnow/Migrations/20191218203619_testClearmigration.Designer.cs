@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hackhathonTarnow.Context;
@@ -9,15 +10,16 @@ using hackhathonTarnow.Context;
 namespace hackhathonTarnow.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20190414124550_init")]
-    partial class init
+    [Migration("20191218203619_testClearmigration")]
+    partial class testClearmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("hackhathonTarnow.Models.Parking", b =>
                 {
@@ -45,12 +47,30 @@ namespace hackhathonTarnow.Migrations
                     b.ToTable("Parkings");
                 });
 
-            modelBuilder.Entity("hackhathonTarnow.Models.Space", b =>
+            modelBuilder.Entity("hackhathonTarnow.Models.ParkingHistory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("EndTime");
+                    b.Property<DateTime>("EndTime");
+
+                    b.Property<int>("HowLong");
+
+                    b.Property<Guid>("ParkingId");
+
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ParkingHistories");
+                });
+
+            modelBuilder.Entity("hackhathonTarnow.Models.Space", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("IsBusy");
 
@@ -58,11 +78,11 @@ namespace hackhathonTarnow.Migrations
 
                     b.Property<float>("Longtitude");
 
-                    b.Property<Guid?>("ParkingId");
+                    b.Property<Guid>("ParkingId");
 
                     b.Property<string>("Plate");
 
-                    b.Property<DateTime?>("StartTime");
+                    b.Property<string>("SpaceType");
 
                     b.HasKey("Id");
 
@@ -76,11 +96,19 @@ namespace hackhathonTarnow.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime?>("ActivationDate");
+
                     b.Property<string>("CardId");
 
                     b.Property<DateTime>("CreatedDate");
 
+                    b.Property<string>("DefaultPlate");
+
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsActivated");
+
+                    b.Property<bool?>("IsPremium");
 
                     b.Property<string>("Name");
 
@@ -123,9 +151,10 @@ namespace hackhathonTarnow.Migrations
 
             modelBuilder.Entity("hackhathonTarnow.Models.Space", b =>
                 {
-                    b.HasOne("hackhathonTarnow.Models.Parking", "Parking")
+                    b.HasOne("hackhathonTarnow.Models.Parking")
                         .WithMany("Spaces")
-                        .HasForeignKey("ParkingId");
+                        .HasForeignKey("ParkingId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("hackhathonTarnow.Models.Vehicle", b =>

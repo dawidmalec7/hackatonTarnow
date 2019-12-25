@@ -60,11 +60,13 @@ namespace hackhathonTarnow
                                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))
                             };
                         });
-            services.AddDbContextPool<MySqlContext>(options => options.UseMySql("Server=127.0.0.1;Port=3306;Database=parkings;User=root;Password=zaq1@WSX;", mysqlOptions =>
-            {
-                mysqlOptions.ServerVersion(new Version(10, 1, 32), ServerType.MySql); // replace with your Server Version and Type
-            }))
-            ;
+            services.AddDbContext<MySqlContext>(options => {
+                options.UseSqlServer("Server=DESKTOP-4DA5LEH;Database=ParkingiTest; MultipleActiveResultSets=True; App=EntityFrameworkCore; Trusted_Connection=True; Integrated Security=true;");
+#if DEBUG
+                options.EnableSensitiveDataLogging();
+#endif
+
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
    
 
